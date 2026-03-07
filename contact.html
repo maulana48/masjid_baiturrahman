@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontak — Masjid Baiturrahman</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --deep-green: #0d2b1f;
+            --mid-green: #1a4a30;
+            --light-green: #2e7d52;
+            --cream: #f7f2e8;
+            --warm-white: #fdfaf3;
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--warm-white);
+            color: var(--deep-green);
+        }
+
+        .geo-bg {
+            background-color: var(--deep-green);
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(201, 168, 76, 0.06) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.4' opacity='0.18'%3E%3Cpolygon points='40,4 76,22 76,58 40,76 4,58 4,22'/%3E%3Cpolygon points='40,14 66,28 66,52 40,66 14,52 14,28'/%3E%3Cline x1='40' y1='4' x2='40' y2='14'/%3E%3Cline x1='76' y1='22' x2='66' y2='28'/%3E%3Cline x1='76' y1='58' x2='66' y2='52'/%3E%3Cline x1='40' y1='76' x2='40' y2='66'/%3E%3Cline x1='4' y1='58' x2='14' y2='52'/%3E%3Cline x1='4' y1='22' x2='14' y2='28'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .gold-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.06em;
+        }
+
+        .arabic-title {
+            font-family: 'Amiri', serif;
+            direction: rtl;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up {
+            animation: fadeUp 0.75s ease both;
+        }
+
+        .delay-1 {
+            animation-delay: 0.15s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.30s;
+        }
+
+        /* Page hero */
+        .page-hero-bg {
+            background-color: var(--deep-green);
+            background-image:
+                radial-gradient(ellipse at 70% 50%, rgba(201, 168, 76, 0.1) 0%, transparent 55%),
+                radial-gradient(ellipse at 30% 50%, rgba(46, 125, 82, 0.12) 0%, transparent 55%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.35' opacity='0.12'%3E%3Crect x='10' y='10' width='40' height='40' rx='2'/%3E%3Crect x='20' y='20' width='20' height='20' rx='2'/%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Info card */
+        .info-card {
+            border-top: 3px solid var(--gold);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(13, 43, 31, 0.12);
+        }
+
+        /* Input fields */
+        .form-input {
+            width: 100%;
+            border: 1.5px solid #d1e8d9;
+            border-radius: 0.75rem;
+            padding: 0.875rem 1.1rem;
+            font-size: 0.9rem;
+            color: var(--deep-green);
+            background: white;
+            transition: border-color 0.25s, box-shadow 0.25s;
+            outline: none;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .form-input::placeholder {
+            color: #a0b8ab;
+        }
+
+        .form-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
+        }
+
+        .form-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #2e7d52;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Map placeholder */
+        .map-container {
+            background: linear-gradient(135deg, var(--deep-green), var(--mid-green));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.3' opacity='0.15'%3E%3Crect x='5' y='5' width='30' height='30'/%3E%3Cline x1='20' y1='5' x2='20' y2='35'/%3E%3Cline x1='5' y1='20' x2='35' y2='20'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* FAQ accordion */
+        .faq-item {
+            border-bottom: 1px solid rgba(13, 43, 31, 0.08);
+        }
+
+        .faq-answer {
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            max-height: 0;
+        }
+
+        .faq-answer.open {
+            max-height: 200px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-icon.open {
+            transform: rotate(45deg);
+        }
+
+        /* Social button */
+        .social-btn {
+            transition: transform 0.25s, background 0.25s, border-color 0.25s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Success toast */
+        .toast {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #scrollTop {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        #scrollTop:hover {
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+
+<body x-data="{ menuOpen: false, activeTab: 'umum', openFaq: null, formSent: false }">
+
+    <!-- ── NAVBAR ── -->
+    <nav class="geo-bg fixed top-0 left-0 right-0 z-50 shadow-xl">
+        <div class="gold-divider absolute bottom-0 left-0 right-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-3">
+                    <svg width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="21" cy="21" r="20" fill="none" stroke="#c9a84c" stroke-width="1" />
+                        <path d="M26,9 A13,13 0 1,0 26,33 A9,9 0 1,1 26,9Z" fill="#c9a84c" opacity="0.9" />
+                        <polygon
+                            points="30,14 31.2,17.6 35,17.6 32,19.8 33.2,23.4 30,21.2 26.8,23.4 28,19.8 25,17.6 28.8,17.6"
+                            fill="#c9a84c" />
+                    </svg>
+                    <div>
+                        <p class="text-xs text-yellow-300/70 tracking-widest uppercase font-light leading-none">Masjid
+                        </p>
+                        <p class="font-['Cinzel'] text-yellow-400 font-bold text-lg leading-tight tracking-wide">
+                            Baiturrahman</p>
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center gap-7">
+                    <a href="index.html"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Home</a>
+                    <a href="about.html"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">About</a>
+                    <a href="index.html#prayers"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Prayer
+                        Times</a>
+                    <a href="index.html#blog"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Pengajian</a>
+                    <a href="index.html#gallery"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Gallery</a>
+                    <a href="contact.html"
+                        class="bg-yellow-600/20 border border-yellow-500/50 text-yellow-400 hover:bg-yellow-500 hover:text-green-950 text-sm font-semibold tracking-wider uppercase px-5 py-2 rounded transition-all duration-300">Contact</a>
+                </div>
+                <button @click="menuOpen=!menuOpen"
+                    class="md:hidden text-yellow-400 p-2 rounded hover:bg-white/10 transition">
+                    <svg x-show="!menuOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg x-show="menuOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div x-show="menuOpen" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="md:hidden geo-bg border-t border-yellow-500/20 px-4 pb-5 pt-3 space-y-1">
+            <a href="index.html" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Home</a>
+            <a href="about.html" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">About</a>
+            <a href="index.html#prayers" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Prayer
+                Times</a>
+            <a href="index.html#blog" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Pengajian</a>
+            <a href="index.html#gallery" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Gallery</a>
+            <a href="contact.html" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-yellow-400 border border-yellow-500/40 rounded font-medium tracking-wider uppercase text-sm mt-2 hover:bg-yellow-500/20 transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ── PAGE HERO ── -->
+    <section
+        class="page-hero-bg pt-20 min-h-[50vh] flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[500px] h-[500px] rounded-full border border-yellow-500/5 absolute"></div>
+            <div class="w-[300px] h-[300px] rounded-full border border-yellow-500/8 absolute"></div>
+        </div>
+        <div class="relative z-10 px-6 py-16">
+            <p class="arabic-title text-yellow-400/60 text-3xl mb-3 fade-up">تَوَاصَلْ مَعَنَا</p>
+            <h1 class="section-title text-5xl md:text-6xl font-bold text-cream mb-4 fade-up delay-1">Hubungi <span
+                    class="text-yellow-400">Kami</span></h1>
+            <div class="gold-divider w-28 mx-auto mb-5 fade-up delay-2"></div>
+            <p class="text-cream/50 text-sm tracking-widest uppercase fade-up delay-2">Lokasi · Kontak · Pesan · FAQ</p>
+        </div>
+        <div
+            class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 text-xs text-cream/30 tracking-widest uppercase">
+            <a href="index.html" class="hover:text-yellow-400 transition">Home</a>
+            <span>›</span>
+            <span class="text-yellow-400/70">Contact</span>
+        </div>
+    </section>
+
+    <!-- ── INFO CARDS ── -->
+    <section class="geo-bg py-14">
+        <div class="max-w-6xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Alamat -->
+            <div class="info-card bg-white/5 rounded-xl p-6">
+                <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                <p class="font-['Cinzel'] text-yellow-400 text-sm font-semibold mb-2 tracking-wide">Alamat</p>
+                <p class="text-cream/60 text-sm leading-relaxed">Jl. Masjid Raya No. 1<br />Banda Aceh, Aceh
+                    23122<br />Indonesia</p>
+            </div>
+            <!-- Telepon -->
+            <div class="info-card bg-white/5 rounded-xl p-6">
+                <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                </div>
+                <p class="font-['Cinzel'] text-yellow-400 text-sm font-semibold mb-2 tracking-wide">Telepon</p>
+                <p class="text-cream/60 text-sm leading-relaxed">+62 651 123 4567<br />+62 812 3456 7890</p>
+            </div>
+            <!-- Email -->
+            <div class="info-card bg-white/5 rounded-xl p-6">
+                <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <p class="font-['Cinzel'] text-yellow-400 text-sm font-semibold mb-2 tracking-wide">Email</p>
+                <p class="text-cream/60 text-sm leading-relaxed">info@masjid-baiturrahman.id<br />admin@baiturrahman.id
+                </p>
+            </div>
+            <!-- Jam Operasional -->
+            <div class="info-card bg-white/5 rounded-xl p-6">
+                <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <p class="font-['Cinzel'] text-yellow-400 text-sm font-semibold mb-2 tracking-wide">Jam Operasional</p>
+                <p class="text-cream/60 text-sm leading-relaxed">Masjid: 24 jam setiap hari<br />Kantor: 08.00–17.00
+                    WIB<br />Senin – Sabtu</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FORM + MAP ── -->
+    <section class="py-24 bg-warm-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12">
+
+                <!-- Form -->
+                <div>
+                    <p class="text-yellow-600 text-xs tracking-widest uppercase mb-3 font-medium">Kirim Pesan</p>
+                    <h2 class="section-title text-3xl font-bold text-deep-green mb-2">Ada yang Bisa Kami Bantu?</h2>
+                    <div class="gold-divider w-20 mb-8"></div>
+
+                    <!-- Topic tabs -->
+                    <div class="flex gap-2 flex-wrap mb-8">
+                        <button @click="activeTab='umum'"
+                            :class="activeTab==='umum' ? 'bg-deep-green text-cream' : 'bg-white border border-green-200 text-mid-green hover:border-yellow-400'"
+                            class="text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-lg transition-all duration-200">
+                            Pertanyaan Umum
+                        </button>
+                        <button @click="activeTab='program'"
+                            :class="activeTab==='program' ? 'bg-deep-green text-cream' : 'bg-white border border-green-200 text-mid-green hover:border-yellow-400'"
+                            class="text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-lg transition-all duration-200">
+                            Program &amp; Kegiatan
+                        </button>
+                        <button @click="activeTab='donasi'"
+                            :class="activeTab==='donasi' ? 'bg-deep-green text-cream' : 'bg-white border border-green-200 text-mid-green hover:border-yellow-400'"
+                            class="text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-lg transition-all duration-200">
+                            Donasi &amp; Zakat
+                        </button>
+                        <button @click="activeTab='kunjungan'"
+                            :class="activeTab==='kunjungan' ? 'bg-deep-green text-cream' : 'bg-white border border-green-200 text-mid-green hover:border-yellow-400'"
+                            class="text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-lg transition-all duration-200">
+                            Kunjungan
+                        </button>
+                    </div>
+
+                    <!-- Form fields -->
+                    <div x-show="!formSent"
+                        class="space-y-5 bg-white rounded-2xl shadow-md border border-green-100 p-8">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="form-label">Nama Lengkap</label>
+                                <input type="text" placeholder="Nama Anda" class="form-input" />
+                            </div>
+                            <div>
+                                <label class="form-label">No. Telepon</label>
+                                <input type="tel" placeholder="+62 8xx xxxx xxxx" class="form-input" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Email</label>
+                            <input type="email" placeholder="email@contoh.com" class="form-input" />
+                        </div>
+                        <div>
+                            <label class="form-label">Topik</label>
+                            <select class="form-input appearance-none cursor-pointer">
+                                <option x-show="activeTab==='umum'" value="">-- Pilih Topik --</option>
+                                <option>Informasi Umum</option>
+                                <option x-show="activeTab==='program'">Jadwal Kajian</option>
+                                <option x-show="activeTab==='program'">Pendaftaran TPA</option>
+                                <option x-show="activeTab==='donasi'">Informasi Donasi</option>
+                                <option x-show="activeTab==='donasi'">Pembayaran Zakat</option>
+                                <option x-show="activeTab==='kunjungan'">Kunjungan Wisata</option>
+                                <option x-show="activeTab==='kunjungan'">Kunjungan Studi</option>
+                                <option>Lainnya</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Pesan</label>
+                            <textarea rows="5" placeholder="Tuliskan pesan Anda di sini..."
+                                class="form-input resize-none"></textarea>
+                        </div>
+                        <button @click="formSent=true"
+                            class="w-full bg-deep-green hover:bg-mid-green text-cream font-bold tracking-widest uppercase text-sm py-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-green-900/20 hover:shadow-lg flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                            </svg>
+                            Kirim Pesan
+                        </button>
+                    </div>
+
+                    <!-- Success state -->
+                    <div x-show="formSent" x-transition:enter="transition ease-out duration-400"
+                        x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                        class="bg-white rounded-2xl shadow-md border border-green-100 p-12 text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
+                            <svg class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <h3 class="font-['Cinzel'] text-deep-green text-xl font-bold mb-3">Jazakallahu Khairan!</h3>
+                        <p class="text-mid-green/70 text-sm leading-relaxed mb-6">Pesan Anda telah kami terima. Tim kami
+                            akan menghubungi Anda dalam 1×24 jam, insyaAllah.</p>
+                        <button @click="formSent=false"
+                            class="border-2 border-deep-green/20 text-mid-green hover:border-yellow-500 hover:text-yellow-600 text-xs font-semibold tracking-widest uppercase px-6 py-2.5 rounded-lg transition">
+                            Kirim Pesan Lain
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Map + directions -->
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-yellow-600 text-xs tracking-widest uppercase mb-3 font-medium">Lokasi Kami</p>
+                        <h2 class="section-title text-3xl font-bold text-deep-green mb-2">Temukan Kami</h2>
+                        <div class="gold-divider w-20 mb-8"></div>
+                    </div>
+
+                    <!-- Map placeholder -->
+                    <div
+                        class="map-container rounded-2xl h-72 flex items-center justify-center relative shadow-xl overflow-hidden">
+                        <!-- Simulated map grid lines -->
+                        <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 288"
+                            preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="mapGrid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#c9a84c" stroke-width="0.5" />
+                                </pattern>
+                            </defs>
+                            <rect width="400" height="288" fill="url(#mapGrid)" />
+                            <!-- Simulated roads -->
+                            <rect x="0" y="130" width="400" height="6" fill="#c9a84c" opacity="0.3" rx="3" />
+                            <rect x="180" y="0" width="6" height="288" fill="#c9a84c" opacity="0.3" rx="3" />
+                            <rect x="0" y="70" width="400" height="3" fill="#c9a84c" opacity="0.15" rx="1.5" />
+                            <rect x="80" y="0" width="3" height="288" fill="#c9a84c" opacity="0.15" rx="1.5" />
+                            <rect x="300" y="0" width="3" height="288" fill="#c9a84c" opacity="0.15" rx="1.5" />
+                        </svg>
+                        <!-- Location pin -->
+                        <div class="relative z-10 text-center">
+                            <div
+                                class="w-14 h-14 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg shadow-yellow-900/40 animate-bounce">
+                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                </svg>
+                            </div>
+                            <div
+                                class="bg-deep-green/90 backdrop-blur rounded-xl px-5 py-3 border border-yellow-500/30">
+                                <p class="font-['Cinzel'] text-yellow-400 font-semibold text-sm">Masjid Baiturrahman</p>
+                                <p class="text-cream/60 text-xs mt-0.5">Jl. Masjid Raya No. 1, Banda Aceh</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direction cards -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <a href="#"
+                            class="bg-white border border-green-100 rounded-xl p-4 text-center shadow-sm hover:border-yellow-400 hover:shadow-md transition group">
+                            <svg class="w-6 h-6 text-mid-green group-hover:text-yellow-600 mx-auto mb-2 transition"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            </svg>
+                            <p
+                                class="text-xs font-semibold text-mid-green group-hover:text-yellow-600 tracking-wide transition">
+                                Google Maps</p>
+                        </a>
+                        <a href="#"
+                            class="bg-white border border-green-100 rounded-xl p-4 text-center shadow-sm hover:border-yellow-400 hover:shadow-md transition group">
+                            <svg class="w-6 h-6 text-mid-green group-hover:text-yellow-600 mx-auto mb-2 transition"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p
+                                class="text-xs font-semibold text-mid-green group-hover:text-yellow-600 tracking-wide transition">
+                                Waze</p>
+                        </a>
+                        <a href="#"
+                            class="bg-white border border-green-100 rounded-xl p-4 text-center shadow-sm hover:border-yellow-400 hover:shadow-md transition group">
+                            <svg class="w-6 h-6 text-mid-green group-hover:text-yellow-600 mx-auto mb-2 transition"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                            </svg>
+                            <p
+                                class="text-xs font-semibold text-mid-green group-hover:text-yellow-600 tracking-wide transition">
+                                Bagikan</p>
+                        </a>
+                    </div>
+
+                    <!-- Transport info -->
+                    <div class="bg-white border border-green-100 rounded-2xl p-6 shadow-sm">
+                        <p class="font-['Cinzel'] text-deep-green font-semibold mb-4 text-sm">Cara Menuju Masjid</p>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-7 h-7 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                </div>
+                                <p class="text-mid-green/70 text-sm leading-relaxed"><span
+                                        class="font-semibold text-deep-green">Dari Bandara SMB II:</span> ±25 menit via
+                                    Jl. Sultan Iskandar Muda</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-7 h-7 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                    </svg>
+                                </div>
+                                <p class="text-mid-green/70 text-sm leading-relaxed"><span
+                                        class="font-semibold text-deep-green">Transportasi Umum:</span> Tersedia angkot
+                                    rute Pasar Aceh dari Terminal Batoh</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-7 h-7 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                    </svg>
+                                </div>
+                                <p class="text-mid-green/70 text-sm leading-relaxed"><span
+                                        class="font-semibold text-deep-green">Parkir:</span> Area parkir luas tersedia
+                                    di sekitar masjid</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SOCIAL MEDIA ── -->
+    <section class="py-16" style="background:#eef7f0;">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="text-yellow-600 text-xs tracking-widest uppercase mb-3 font-medium">Ikuti Kami</p>
+            <h2 class="section-title text-2xl md:text-3xl font-bold text-deep-green mb-2">Media Sosial</h2>
+            <div class="gold-divider w-20 mx-auto mb-10"></div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#"
+                    class="social-btn flex items-center gap-3 bg-white border-2 border-blue-200 rounded-xl px-5 py-3 hover:border-blue-500 hover:shadow-md shadow-sm">
+                    <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-gray-800">Facebook</p>
+                        <p class="text-xs text-gray-400">@masjid.baiturrahman</p>
+                    </div>
+                </a>
+                <a href="#"
+                    class="social-btn flex items-center gap-3 bg-white border-2 border-pink-200 rounded-xl px-5 py-3 hover:border-pink-500 hover:shadow-md shadow-sm">
+                    <svg class="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                    </svg>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-gray-800">Instagram</p>
+                        <p class="text-xs text-gray-400">@baiturrahman.aceh</p>
+                    </div>
+                </a>
+                <a href="#"
+                    class="social-btn flex items-center gap-3 bg-white border-2 border-red-200 rounded-xl px-5 py-3 hover:border-red-500 hover:shadow-md shadow-sm">
+                    <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-gray-800">YouTube</p>
+                        <p class="text-xs text-gray-400">Masjid Baiturrahman TV</p>
+                    </div>
+                </a>
+                <a href="#"
+                    class="social-btn flex items-center gap-3 bg-white border-2 border-green-200 rounded-xl px-5 py-3 hover:border-green-500 hover:shadow-md shadow-sm">
+                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-gray-800">WhatsApp</p>
+                        <p class="text-xs text-gray-400">+62 812 3456 7890</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="py-24 bg-warm-white">
+        <div class="max-w-3xl mx-auto px-6">
+            <p class="text-center text-yellow-600 text-xs tracking-widest uppercase mb-3 font-medium">Pertanyaan Umum
+            </p>
+            <h2 class="section-title text-center text-3xl font-bold text-deep-green mb-2">FAQ</h2>
+            <div class="gold-divider w-20 mx-auto mb-12"></div>
+
+            <div class="space-y-0 border border-green-100 rounded-2xl overflow-hidden shadow-sm bg-white">
+                <!-- FAQ 1 -->
+                <div class="faq-item" x-data="{open:false}">
+                    <button @click="open=!open"
+                        class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-green-50 transition">
+                        <span class="font-semibold text-deep-green text-sm pr-4">Apakah masjid terbuka untuk non-Muslim
+                            yang ingin berkunjung?</span>
+                        <svg :class="open ? 'rotate-45' : ''"
+                            class="w-5 h-5 text-yellow-600 flex-shrink-0 transition-transform duration-300" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-5">
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Ya, Masjid Baiturrahman terbuka untuk
+                            kunjungan wisata dan edukasi bagi siapa pun, termasuk non-Muslim. Pengunjung diharapkan
+                            mengenakan pakaian yang sopan dan menjaga ketenangan suasana ibadah.</p>
+                    </div>
+                </div>
+                <!-- FAQ 2 -->
+                <div class="faq-item" x-data="{open:false}">
+                    <button @click="open=!open"
+                        class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-green-50 transition">
+                        <span class="font-semibold text-deep-green text-sm pr-4">Bagaimana cara mendaftarkan anak ke
+                            program TPA?</span>
+                        <svg :class="open ? 'rotate-45' : ''"
+                            class="w-5 h-5 text-yellow-600 flex-shrink-0 transition-transform duration-300" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-5">
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Pendaftaran TPA dibuka setiap awal bulan.
+                            Orang tua dapat langsung datang ke kantor takmir pada hari Senin–Jumat pukul 08.00–16.00
+                            WIB, atau menghubungi kami melalui WhatsApp untuk informasi lebih lanjut.</p>
+                    </div>
+                </div>
+                <!-- FAQ 3 -->
+                <div class="faq-item" x-data="{open:false}">
+                    <button @click="open=!open"
+                        class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-green-50 transition">
+                        <span class="font-semibold text-deep-green text-sm pr-4">Bagaimana cara menyalurkan zakat dan
+                            infaq?</span>
+                        <svg :class="open ? 'rotate-45' : ''"
+                            class="w-5 h-5 text-yellow-600 flex-shrink-0 transition-transform duration-300" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-5">
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Zakat, infaq, dan sedekah dapat disalurkan
+                            langsung ke kantor takmir masjid, melalui transfer bank (nomor rekening tersedia di kantor),
+                            atau melalui panitia zakat yang bertugas setiap Jumat setelah shalat.</p>
+                    </div>
+                </div>
+                <!-- FAQ 4 -->
+                <div class="faq-item" x-data="{open:false}">
+                    <button @click="open=!open"
+                        class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-green-50 transition">
+                        <span class="font-semibold text-deep-green text-sm pr-4">Apakah tersedia fasilitas untuk
+                            penyandang disabilitas?</span>
+                        <svg :class="open ? 'rotate-45' : ''"
+                            class="w-5 h-5 text-yellow-600 flex-shrink-0 transition-transform duration-300" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-5">
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Ya, masjid dilengkapi dengan akses kursi
+                            roda, toilet ramah disabilitas, dan jalur khusus di area ibadah utama. Renovasi 2024 juga
+                            memperluas dan memperbaiki fasilitas aksesibilitas ini.</p>
+                    </div>
+                </div>
+                <!-- FAQ 5 -->
+                <div class="faq-item border-b-0" x-data="{open:false}">
+                    <button @click="open=!open"
+                        class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-green-50 transition">
+                        <span class="font-semibold text-deep-green text-sm pr-4">Apakah masjid memiliki fasilitas
+                            penginapan untuk jamaah dari luar kota?</span>
+                        <svg :class="open ? 'rotate-45' : ''"
+                            class="w-5 h-5 text-yellow-600 flex-shrink-0 transition-transform duration-300" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-5">
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Saat ini belum tersedia penginapan resmi di
+                            dalam area masjid. Namun, kami dapat merekomendasikan penginapan di sekitar masjid. Silakan
+                            hubungi kantor takmir untuk informasi akomodasi terdekat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="geo-bg pt-14 pb-6">
+        <div class="gold-divider mb-12"></div>
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-5">
+                        <svg width="36" height="36" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="21" cy="21" r="20" fill="none" stroke="#c9a84c" stroke-width="1" />
+                            <path d="M26,9 A13,13 0 1,0 26,33 A9,9 0 1,1 26,9Z" fill="#c9a84c" opacity="0.9" />
+                            <polygon
+                                points="30,14 31.2,17.6 35,17.6 32,19.8 33.2,23.4 30,21.2 26.8,23.4 28,19.8 25,17.6 28.8,17.6"
+                                fill="#c9a84c" />
+                        </svg>
+                        <p class="font-['Cinzel'] text-yellow-400 font-bold text-lg">Baiturrahman</p>
+                    </div>
+                    <p class="text-cream/50 text-sm leading-relaxed">Masjid Baiturrahman — pusat ibadah, ilmu, dan
+                        silaturahmi umat Muslim di Aceh sejak abad ke-17.</p>
+                </div>
+                <div>
+                    <p class="text-yellow-400/80 text-xs tracking-widest uppercase font-semibold mb-5">Navigasi</p>
+                    <ul class="space-y-2.5">
+                        <li><a href="index.html" class="text-cream/50 hover:text-yellow-400 text-sm transition">Home</a>
+                        </li>
+                        <li><a href="about.html"
+                                class="text-cream/50 hover:text-yellow-400 text-sm transition">About</a></li>
+                        <li><a href="index.html#prayers"
+                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Jadwal Sholat</a></li>
+                        <li><a href="index.html#blog"
+                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Pengajian</a></li>
+                        <li><a href="index.html#gallery"
+                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Gallery</a></li>
+                        <li><a href="contact.html" class="text-yellow-400 text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-yellow-400/80 text-xs tracking-widest uppercase font-semibold mb-5">Kontak Cepat</p>
+                    <p class="text-cream/50 text-sm mb-2">Jl. Masjid Raya No. 1<br />Banda Aceh, Aceh 23122</p>
+                    <p class="text-cream/50 text-sm">+62 651 123 4567</p>
+                    <p class="text-cream/50 text-sm">info@masjid-baiturrahman.id</p>
+                </div>
+            </div>
+            <div class="gold-divider mb-6"></div>
+            <p class="text-center text-cream/30 text-xs tracking-wide">© 2025 Masjid Baiturrahman · Banda Aceh · Dibuat
+                dengan <span class="text-yellow-600">❤</span> untuk kemaslahatan umat</p>
+        </div>
+    </footer>
+
+    <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        class="fixed bottom-6 right-6 geo-bg text-yellow-400 border border-yellow-500/40 w-11 h-11 rounded-full flex items-center justify-center shadow-xl z-40 hover:bg-yellow-600 hover:text-green-950 transition-all duration-300 opacity-0 pointer-events-none">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+    <script>
+        const btn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            btn.style.opacity = window.scrollY > 300 ? '1' : '0';
+            btn.style.pointerEvents = window.scrollY > 300 ? 'auto' : 'none';
+        });
+    </script>
+</body>
+
+</html>

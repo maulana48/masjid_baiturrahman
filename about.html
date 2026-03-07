@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentang Kami — Masjid Baiturrahman</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --deep-green: #0d2b1f;
+            --mid-green: #1a4a30;
+            --light-green: #2e7d52;
+            --cream: #f7f2e8;
+            --warm-white: #fdfaf3;
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--warm-white);
+            color: var(--deep-green);
+        }
+
+        .geo-bg {
+            background-color: var(--deep-green);
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(201, 168, 76, 0.06) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.4' opacity='0.18'%3E%3Cpolygon points='40,4 76,22 76,58 40,76 4,58 4,22'/%3E%3Cpolygon points='40,14 66,28 66,52 40,66 14,52 14,28'/%3E%3Cline x1='40' y1='4' x2='40' y2='14'/%3E%3Cline x1='76' y1='22' x2='66' y2='28'/%3E%3Cline x1='76' y1='58' x2='66' y2='52'/%3E%3Cline x1='40' y1='76' x2='40' y2='66'/%3E%3Cline x1='4' y1='58' x2='14' y2='52'/%3E%3Cline x1='4' y1='22' x2='14' y2='28'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .gold-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.06em;
+        }
+
+        .arabic-title {
+            font-family: 'Amiri', serif;
+            direction: rtl;
+        }
+
+        .card-hover {
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 48px rgba(13, 43, 31, 0.14);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up {
+            animation: fadeUp 0.75s ease both;
+        }
+
+        .delay-1 {
+            animation-delay: 0.15s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.30s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.45s;
+        }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--warm-white);
+            box-shadow: 0 0 0 3px var(--gold);
+        }
+
+        /* Stats counter */
+        .stat-card {
+            border-left: 3px solid var(--gold);
+        }
+
+        /* Team card */
+        .team-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 56px rgba(13, 43, 31, 0.15);
+        }
+
+        .team-avatar {
+            background: linear-gradient(135deg, var(--mid-green), var(--light-green));
+        }
+
+        /* Values icon */
+        .value-icon {
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.15), rgba(201, 168, 76, 0.05));
+            border: 1px solid rgba(201, 168, 76, 0.3);
+        }
+
+        #scrollTop {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        #scrollTop:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Page hero pattern */
+        .page-hero-bg {
+            background-color: var(--deep-green);
+            background-image:
+                radial-gradient(ellipse at 30% 50%, rgba(201, 168, 76, 0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 50%, rgba(46, 125, 82, 0.15) 0%, transparent 55%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.35' opacity='0.12'%3E%3Crect x='10' y='10' width='40' height='40' rx='2'/%3E%3Crect x='20' y='20' width='20' height='20' rx='2'/%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-dot {
+                margin-left: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body x-data="{ menuOpen: false }">
+
+    <!-- ── NAVBAR ── -->
+    <nav class="geo-bg fixed top-0 left-0 right-0 z-50 shadow-xl">
+        <div class="gold-divider absolute bottom-0 left-0 right-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-3">
+                    <svg width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="21" cy="21" r="20" fill="none" stroke="#c9a84c" stroke-width="1" />
+                        <path d="M26,9 A13,13 0 1,0 26,33 A9,9 0 1,1 26,9Z" fill="#c9a84c" opacity="0.9" />
+                        <polygon
+                            points="30,14 31.2,17.6 35,17.6 32,19.8 33.2,23.4 30,21.2 26.8,23.4 28,19.8 25,17.6 28.8,17.6"
+                            fill="#c9a84c" />
+                    </svg>
+                    <div>
+                        <p class="text-xs text-yellow-300/70 tracking-widest uppercase font-light leading-none">Masjid
+                        </p>
+                        <p class="font-['Cinzel'] text-yellow-400 font-bold text-lg leading-tight tracking-wide">
+                            Baiturrahman</p>
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center gap-7">
+                    <a href="index.html"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Home</a>
+                    <a href="about.html"
+                        class="nav-link text-yellow-400 text-sm font-medium tracking-wider uppercase">About</a>
+                    <a href="index.html#prayers"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Prayer
+                        Times</a>
+                    <a href="index.html#blog"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Pengajian</a>
+                    <a href="index.html#gallery"
+                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Gallery</a>
+                    <a href="contact.html"
+                        class="bg-yellow-600/20 border border-yellow-500/50 text-yellow-400 hover:bg-yellow-500 hover:text-green-950 text-sm font-semibold tracking-wider uppercase px-5 py-2 rounded transition-all duration-300">Contact</a>
+                </div>
+                <button @click="menuOpen=!menuOpen"
+                    class="md:hidden text-yellow-400 p-2 rounded hover:bg-white/10 transition">
+                    <svg x-show="!menuOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg x-show="menuOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div x-show="menuOpen" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="md:hidden geo-bg border-t border-yellow-500/20 px-4 pb-5 pt-3 space-y-1">
+            <a href="index.html" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Home</a>
+            <a href="about.html" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-yellow-400 bg-white/5 rounded font-medium tracking-wider uppercase text-sm">About</a>
+            <a href="index.html#prayers" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Prayer
+                Times</a>
+            <a href="index.html#blog" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Pengajian</a>
+            <a href="index.html#gallery" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Gallery</a>
+            <a href="contact.html" @click="menuOpen=false"
+                class="block py-2.5 px-4 text-yellow-400 border border-yellow-500/40 rounded font-medium tracking-wider uppercase text-sm mt-2 hover:bg-yellow-500/20 transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ── PAGE HERO ── -->
+    <section
+        class="page-hero-bg pt-20 min-h-[52vh] flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <!-- Decorative rings -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[600px] h-[600px] rounded-full border border-yellow-500/5 absolute"></div>
+            <div class="w-[400px] h-[400px] rounded-full border border-yellow-500/8 absolute"></div>
+        </div>
+        <div class="relative z-10 px-6 py-16">
+            <p class="arabic-title text-yellow-400/60 text-3xl mb-3 fade-up">عَنْ مَسْجِدِنَا</p>
+            <h1 class="section-title text-5xl md:text-6xl font-bold text-cream mb-4 fade-up delay-1">Tentang <span
+                    class="text-yellow-400">Kami</span></h1>
+            <div class="gold-divider w-28 mx-auto mb-5 fade-up delay-2"></div>
+            <p class="text-cream/50 text-sm tracking-widest uppercase fade-up delay-2">Sejarah · Visi · Struktur · Nilai
+            </p>
+        </div>
+        <!-- Breadcrumb -->
+        <div
+            class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 text-xs text-cream/30 tracking-widest uppercase">
+            <a href="index.html" class="hover:text-yellow-400 transition">Home</a>
+            <span>›</span>
+            <span class="text-yellow-400/70">About</span>
+        </div>
+    </section>
+
+    <!-- ── STATS STRIP ── -->
+    <section class="geo-bg py-10">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="stat-card pl-5">
+                <p class="font-['Cinzel'] text-yellow-400 text-4xl font-bold">1612</p>
+                <p class="text-cream/50 text-xs tracking-widest uppercase mt-1">Tahun Berdiri</p>
+            </div>
+            <div class="stat-card pl-5">
+                <p class="font-['Cinzel'] text-yellow-400 text-4xl font-bold">5.000</p>
+                <p class="text-cream/50 text-xs tracking-widest uppercase mt-1">Kapasitas Jamaah</p>
+            </div>
+            <div class="stat-card pl-5">
+                <p class="font-['Cinzel'] text-yellow-400 text-4xl font-bold">7</p>
+                <p class="text-cream/50 text-xs tracking-widest uppercase mt-1">Kubah Utama</p>
+            </div>
+            <div class="stat-card pl-5">
+                <p class="font-['Cinzel'] text-yellow-400 text-4xl font-bold">20+</p>
+                <p class="text-cream/50 text-xs tracking-widest uppercase mt-1">Program Rutin</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SEJARAH ── -->
+    <section class="py-24 bg-warm-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <!-- SVG illustration panel -->
+                <div class="relative order-2 md:order-1">
+                    <div
+                        class="geo-bg rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] max-w-sm mx-auto flex items-end justify-center relative">
+                        <!-- Geometric frame -->
+                        <div class="absolute inset-4 border border-yellow-500/20 rounded-2xl pointer-events-none"></div>
+                        <div class="absolute inset-8 border border-yellow-500/10 rounded-xl pointer-events-none"></div>
+                        <!-- Mosque full illustration -->
+                        <svg viewBox="0 0 280 320" class="w-full" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Sky gradient circle -->
+                            <defs>
+                                <radialGradient id="skyGrad" cx="50%" cy="30%" r="60%">
+                                    <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.08" />
+                                    <stop offset="100%" stop-color="#0d2b1f" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
+                            <rect x="0" y="0" width="280" height="320" fill="url(#skyGrad)" />
+                            <!-- Stars -->
+                            <circle cx="40" cy="30" r="1" fill="#c9a84c" opacity="0.5" />
+                            <circle cx="240" cy="20" r="1.5" fill="#c9a84c" opacity="0.4" />
+                            <circle cx="130" cy="15" r="1" fill="#c9a84c" opacity="0.6" />
+                            <circle cx="80" cy="50" r="0.8" fill="#c9a84c" opacity="0.3" />
+                            <circle cx="200" cy="45" r="1" fill="#c9a84c" opacity="0.4" />
+                            <!-- Ground -->
+                            <rect x="0" y="260" width="280" height="60" fill="#1a4a30" opacity="0.5" />
+                            <!-- Path to entrance -->
+                            <rect x="120" y="250" width="40" height="15" fill="#c9a84c" opacity="0.15" />
+                            <!-- Water pool -->
+                            <ellipse cx="140" cy="280" rx="55" ry="8" fill="#c9a84c" opacity="0.06" />
+                            <!-- Main structure base -->
+                            <rect x="40" y="200" width="200" height="65" fill="#1a4a30" />
+                            <!-- Arch windows -->
+                            <rect x="50" y="210" width="22" height="45" rx="11 11 0 0" fill="#0d2b1f" />
+                            <rect x="82" y="212" width="18" height="42" rx="9 9 0 0" fill="#0d2b1f" />
+                            <rect x="110" y="207" width="22" height="50" rx="11 11 0 0" fill="#c9a84c" opacity="0.8" />
+                            <!-- Main door -->
+                            <rect x="148" y="207" width="22" height="50" rx="11 11 0 0" fill="#c9a84c" opacity="0.8" />
+                            <!-- Main door -->
+                            <rect x="180" y="212" width="18" height="42" rx="9 9 0 0" fill="#0d2b1f" />
+                            <rect x="208" y="210" width="22" height="45" rx="11 11 0 0" fill="#0d2b1f" />
+                            <!-- Arch detail lines -->
+                            <line x1="50" y1="220" x2="72" y2="220" stroke="#c9a84c" stroke-width="0.5" opacity="0.4" />
+                            <line x1="208" y1="220" x2="230" y2="220" stroke="#c9a84c" stroke-width="0.5"
+                                opacity="0.4" />
+                            <!-- Side domes -->
+                            <path d="M40,200 Q40,172 60,168 Q80,172 80,200Z" fill="#2e7d52" />
+                            <path d="M200,200 Q200,172 220,168 Q240,172 240,200Z" fill="#2e7d52" />
+                            <circle cx="60" cy="165" r="4" fill="#c9a84c" opacity="0.9" />
+                            <circle cx="220" cy="165" r="4" fill="#c9a84c" opacity="0.9" />
+                            <!-- Small domes flanking center -->
+                            <path d="M75,200 Q75,185 92,182 Q109,185 109,200Z" fill="#1a4a30" />
+                            <path d="M171,200 Q171,185 188,182 Q205,185 205,200Z" fill="#1a4a30" />
+                            <!-- Main dome -->
+                            <path d="M95,200 Q95,140 140,130 Q185,140 185,200Z" fill="#2e7d52" />
+                            <path d="M105,200 Q105,150 140,142 Q175,150 175,200Z" fill="#1a4a30" />
+                            <!-- Dome ribs -->
+                            <path d="M140,130 Q140,200 140,200" stroke="#c9a84c" stroke-width="0.5" opacity="0.3" />
+                            <path d="M140,130 Q125,165 110,200" stroke="#c9a84c" stroke-width="0.5" opacity="0.2" />
+                            <path d="M140,130 Q155,165 170,200" stroke="#c9a84c" stroke-width="0.5" opacity="0.2" />
+                            <!-- Crescent on main dome -->
+                            <path d="M137,134 A5,5 0 1,0 137,144 A3.5,3.5 0 1,1 137,134Z" fill="#c9a84c" />
+                            <polygon
+                                points="144,133 145,136.2 148.4,136.2 145.7,138.1 146.7,141.3 144,139.4 141.3,141.3 142.3,138.1 139.6,136.2 143,136.2"
+                                fill="#c9a84c" />
+                            <!-- Minarets -->
+                            <rect x="6" y="150" width="16" height="115" fill="#1a4a30" />
+                            <path d="M6,150 Q14,120 22,150Z" fill="#2e7d52" />
+                            <rect x="8" y="170" width="12" height="1" fill="#c9a84c" opacity="0.4" />
+                            <rect x="8" y="190" width="12" height="1" fill="#c9a84c" opacity="0.4" />
+                            <rect x="8" y="210" width="12" height="1" fill="#c9a84c" opacity="0.4" />
+                            <circle cx="14" cy="118" r="5" fill="#2e7d52" stroke="#c9a84c" stroke-width="1"
+                                opacity="0.8" />
+                            <rect x="258" y="150" width="16" height="115" fill="#1a4a30" />
+                            <path d="M258,150 Q266,120 274,150Z" fill="#2e7d52" />
+                            <rect x="260" y="170" width="12" height="1" fill="#c9a84c" opacity="0.4" />
+                            <rect x="260" y="190" width="12" height="1" fill="#c9a84c" opacity="0.4" />
+                            <rect x="260" y="210" width="12" height="1" fill="#c9a84c" opacity="0.4" />
+                            <circle cx="266" cy="118" r="5" fill="#2e7d52" stroke="#c9a84c" stroke-width="1"
+                                opacity="0.8" />
+                            <!-- Decorative border line -->
+                            <rect x="40" y="200" width="200" height="2" fill="#c9a84c" opacity="0.3" />
+                            <rect x="40" y="205" width="200" height="1" fill="#c9a84c" opacity="0.15" />
+                        </svg>
+                        <!-- Gold corner accents -->
+                        <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-yellow-500/40"></div>
+                        <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-yellow-500/40"></div>
+                        <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-yellow-500/40"></div>
+                        <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-yellow-500/40"></div>
+                    </div>
+                </div>
+                <!-- Text -->
+                <div class="order-1 md:order-2">
+                    <p class="text-yellow-600 text-xs tracking-widest uppercase mb-3 font-medium">Sejarah Panjang</p>
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-deep-green mb-2">Warisan 4 Abad</h2>
+                    <div class="gold-divider w-20 mb-7"></div>
+                    <p class="text-mid-green/80 leading-relaxed mb-4 text-[15px]">
+                        Masjid Baiturrahman didirikan pada masa pemerintahan Sultan Iskandar Muda sekitar tahun 1612 M.
+                        Sebagai simbol kebanggaan dan keteguhan iman rakyat Aceh, masjid ini menjadi pusat penyebaran
+                        Islam di Nusantara sejak abad ke-17.
+                    </p>
+                    <p class="text-mid-green/70 leading-relaxed mb-4 text-[15px]">
+                        Masjid ini pernah dibakar oleh Belanda pada tahun 1873 saat Perang Aceh, namun dibangun kembali
+                        oleh pemerintah kolonial Belanda pada tahun 1879 sebagai upaya peredaman perlawanan rakyat.
+                        Ironisnya, bangunan baru tersebut justru menjadi simbol perlawanan yang lebih kuat.
+                    </p>
+                    <p class="text-mid-green/70 leading-relaxed mb-8 text-[15px]">
+                        Pasca tsunami 2004, masjid ini berdiri kokoh di tengah kerusakan dahsyat — sebuah keajaiban yang
+                        semakin memperkuat keyakinan umat akan kebesaran Allah SWT.
+                    </p>
+                    <div class="inline-flex items-center gap-3 text-yellow-600 font-semibold text-sm tracking-wide">
+                        <div class="w-8 h-px bg-yellow-500"></div>
+                        <span>Berdiri sejak 1612 M — lebih dari 4 abad melayani umat</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── TIMELINE ── -->
+    <section class="py-24" style="background: linear-gradient(180deg, #f7f2e8 0%, #eef7f0 100%);">
+        <div class="max-w-4xl mx-auto px-6">
+            <p class="text-center text-yellow-600 text-xs tracking-widest uppercase mb-3">Perjalanan Sejarah</p>
+            <h2 class="section-title text-center text-deep-green text-3xl md:text-4xl font-bold mb-2">Linimasa</h2>
+            <div class="gold-divider w-20 mx-auto mb-16"></div>
+
+            <!-- Timeline -->
+            <div class="relative">
+                <div class="hidden md:block timeline-line"></div>
+
+                <!-- Event 1 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6 mb-14">
+                    <div class="md:w-1/2 md:text-right md:pr-12">
+                        <p class="font-['Cinzel'] text-yellow-600 text-xl font-bold mb-1">1612 M</p>
+                        <h3 class="font-['Cinzel'] text-deep-green font-semibold text-lg mb-2">Pendirian Masjid</h3>
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Didirikan oleh Sultan Iskandar Muda sebagai
+                            pusat ibadah dan simbol kejayaan Kesultanan Aceh Darussalam.</p>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-dot"></div>
+                    <div class="md:w-1/2 md:pl-12 md:block hidden"></div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6 mb-14">
+                    <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-dot"></div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <p class="font-['Cinzel'] text-yellow-600 text-xl font-bold mb-1">1873 M</p>
+                        <h3 class="font-['Cinzel'] text-deep-green font-semibold text-lg mb-2">Dibakar Belanda</h3>
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Dalam agresi pertama Belanda, masjid
+                            dibakar. Namun api tidak mampu memadamkan semangat perjuangan rakyat Aceh.</p>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6 mb-14">
+                    <div class="md:w-1/2 md:text-right md:pr-12">
+                        <p class="font-['Cinzel'] text-yellow-600 text-xl font-bold mb-1">1879 M</p>
+                        <h3 class="font-['Cinzel'] text-deep-green font-semibold text-lg mb-2">Dibangun Kembali</h3>
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Belanda membangun kembali masjid dengan
+                            arsitektur baru bergaya Mughal — 1 kubah utama dan 4 menara.</p>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-dot"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6 mb-14">
+                    <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-dot"></div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <p class="font-['Cinzel'] text-yellow-600 text-xl font-bold mb-1">1935 M</p>
+                        <h3 class="font-['Cinzel'] text-deep-green font-semibold text-lg mb-2">Perluasan Pertama</h3>
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Sayap kiri dan kanan diperluas, serta 2
+                            kubah tambahan dibangun untuk menampung jamaah yang terus bertambah.</p>
+                    </div>
+                </div>
+
+                <!-- Event 5 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6 mb-14">
+                    <div class="md:w-1/2 md:text-right md:pr-12">
+                        <p class="font-['Cinzel'] text-yellow-600 text-xl font-bold mb-1">2004 M</p>
+                        <h3 class="font-['Cinzel'] text-deep-green font-semibold text-lg mb-2">Bertahan dari Tsunami
+                        </h3>
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Gelombang tsunami 26 Desember melanda Banda
+                            Aceh. Masjid Baiturrahman berdiri kokoh — menjadi tempat berlindung ribuan warga.</p>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-dot"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Event 6 -->
+                <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6">
+                    <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-dot"
+                        style="background:#e8c97a; box-shadow: 0 0 0 4px rgba(201,168,76,0.3);"></div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <p class="font-['Cinzel'] text-yellow-600 text-xl font-bold mb-1">2024 M</p>
+                        <h3 class="font-['Cinzel'] text-deep-green font-semibold text-lg mb-2">Renovasi &amp;
+                            Modernisasi</h3>
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Program renovasi menyeluruh dimulai:
+                            fasilitas modern, aksesibilitas, dan perluasan area edukasi Islam dilaksanakan sambil
+                            menjaga keaslian arsitektur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── VISI MISI ── -->
+    <section class="geo-bg py-20">
+        <div class="max-w-5xl mx-auto px-6">
+            <p class="text-center text-yellow-400/70 text-xs tracking-widest uppercase mb-3">Arah &amp; Tujuan</p>
+            <h2 class="section-title text-center text-cream text-3xl md:text-4xl font-bold mb-2">Visi &amp; Misi</h2>
+            <div class="gold-divider w-20 mx-auto mb-12"></div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Visi -->
+                <div class="bg-white/5 border border-yellow-500/20 rounded-2xl p-8 card-hover">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="value-icon w-12 h-12 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-['Cinzel'] text-yellow-400 font-bold text-xl">Visi</h3>
+                    </div>
+                    <p class="text-cream/80 leading-relaxed italic text-lg mb-4">"Menjadi pusat ibadah, pendidikan, dan
+                        peradaban Islam yang rahmatan lil alamin di Aceh dan Nusantara."</p>
+                </div>
+                <!-- Misi -->
+                <div class="bg-white/5 border border-yellow-500/20 rounded-2xl p-8 card-hover">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="value-icon w-12 h-12 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                            </svg>
+                        </div>
+                        <h3 class="font-['Cinzel'] text-yellow-400 font-bold text-xl">Misi</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-cream/70 text-sm leading-relaxed"><span
+                                class="text-yellow-500 mt-0.5 flex-shrink-0">◆</span>Menyelenggarakan ibadah dengan
+                            tertib dan khusyuk sesuai syariat Islam</li>
+                        <li class="flex items-start gap-2 text-cream/70 text-sm leading-relaxed"><span
+                                class="text-yellow-500 mt-0.5 flex-shrink-0">◆</span>Mengembangkan program pendidikan
+                            Islam bagi seluruh kalangan usia</li>
+                        <li class="flex items-start gap-2 text-cream/70 text-sm leading-relaxed"><span
+                                class="text-yellow-500 mt-0.5 flex-shrink-0">◆</span>Memperkuat ukhuwah islamiyah dan
+                            kepedulian sosial kemasyarakatan</li>
+                        <li class="flex items-start gap-2 text-cream/70 text-sm leading-relaxed"><span
+                                class="text-yellow-500 mt-0.5 flex-shrink-0">◆</span>Melestarikan warisan budaya dan
+                            arsitektur masjid sebagai aset peradaban</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── NILAI-NILAI ── -->
+    <section class="py-24 bg-warm-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-center text-yellow-600 text-xs tracking-widest uppercase mb-3">Landasan Kami</p>
+            <h2 class="section-title text-center text-deep-green text-3xl md:text-4xl font-bold mb-2">Nilai-Nilai Kami
+            </h2>
+            <div class="gold-divider w-20 mx-auto mb-14"></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white border border-green-100 rounded-2xl p-6 card-hover text-center shadow-sm">
+                    <div class="w-14 h-14 value-icon rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-['Cinzel'] text-deep-green font-semibold mb-2">Ikhlas</h4>
+                    <p class="text-mid-green/60 text-sm leading-relaxed">Semua kegiatan diniatkan semata-mata karena
+                        Allah SWT.</p>
+                </div>
+                <div class="bg-white border border-green-100 rounded-2xl p-6 card-hover text-center shadow-sm">
+                    <div class="w-14 h-14 value-icon rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-['Cinzel'] text-deep-green font-semibold mb-2">Ukhuwah</h4>
+                    <p class="text-mid-green/60 text-sm leading-relaxed">Mempererat persaudaraan sesama Muslim tanpa
+                        membeda-bedakan.</p>
+                </div>
+                <div class="bg-white border border-green-100 rounded-2xl p-6 card-hover text-center shadow-sm">
+                    <div class="w-14 h-14 value-icon rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-['Cinzel'] text-deep-green font-semibold mb-2">Amanah</h4>
+                    <p class="text-mid-green/60 text-sm leading-relaxed">Mengelola setiap titipan umat dengan transparan
+                        dan bertanggung jawab.</p>
+                </div>
+                <div class="bg-white border border-green-100 rounded-2xl p-6 card-hover text-center shadow-sm">
+                    <div class="w-14 h-14 value-icon rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h4 class="font-['Cinzel'] text-deep-green font-semibold mb-2">Ilmu</h4>
+                    <p class="text-mid-green/60 text-sm leading-relaxed">Mendorong semangat belajar dan pengembangan
+                        diri setiap Muslim.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PENGURUS ── -->
+    <section class="py-24" style="background:#eef7f0;">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-center text-yellow-600 text-xs tracking-widest uppercase mb-3">Pengurus &amp; Takmir</p>
+            <h2 class="section-title text-center text-deep-green text-3xl md:text-4xl font-bold mb-2">Struktur
+                Organisasi</h2>
+            <div class="gold-divider w-20 mx-auto mb-14"></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Person 1 -->
+                <div class="team-card bg-white rounded-2xl overflow-hidden shadow-md border border-green-100">
+                    <div class="team-avatar h-40 flex items-center justify-center relative">
+                        <svg class="w-20 h-20 opacity-30" viewBox="0 0 80 80" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="30" r="16" fill="#c9a84c" />
+                            <path d="M10,75 Q10,52 40,52 Q70,52 70,75Z" fill="#c9a84c" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <p class="arabic-title text-yellow-400/50 text-4xl">أ</p>
+                        </div>
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="font-['Cinzel'] text-deep-green font-bold text-base mb-0.5">Ust. Ahmad Fauzi</p>
+                        <p class="text-yellow-600 text-xs tracking-widest uppercase">Ketua Umum</p>
+                    </div>
+                </div>
+                <!-- Person 2 -->
+                <div class="team-card bg-white rounded-2xl overflow-hidden shadow-md border border-green-100">
+                    <div class="team-avatar h-40 flex items-center justify-center relative"
+                        style="background:linear-gradient(135deg,#1a4a30,#0d2b1f);">
+                        <svg class="w-20 h-20 opacity-30" viewBox="0 0 80 80" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="30" r="16" fill="#c9a84c" />
+                            <path d="M10,75 Q10,52 40,52 Q70,52 70,75Z" fill="#c9a84c" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <p class="arabic-title text-yellow-400/50 text-4xl">م</p>
+                        </div>
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="font-['Cinzel'] text-deep-green font-bold text-base mb-0.5">Ust. Muhammad Iqbal</p>
+                        <p class="text-yellow-600 text-xs tracking-widest uppercase">Sekretaris</p>
+                    </div>
+                </div>
+                <!-- Person 3 -->
+                <div class="team-card bg-white rounded-2xl overflow-hidden shadow-md border border-green-100">
+                    <div class="team-avatar h-40 flex items-center justify-center relative"
+                        style="background:linear-gradient(135deg,#2e7d52,#1a4a30);">
+                        <svg class="w-20 h-20 opacity-30" viewBox="0 0 80 80" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="30" r="16" fill="#c9a84c" />
+                            <path d="M10,75 Q10,52 40,52 Q70,52 70,75Z" fill="#c9a84c" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <p class="arabic-title text-yellow-400/50 text-4xl">ر</p>
+                        </div>
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="font-['Cinzel'] text-deep-green font-bold text-base mb-0.5">Ust. Rizal Hakim</p>
+                        <p class="text-yellow-600 text-xs tracking-widest uppercase">Bendahara</p>
+                    </div>
+                </div>
+                <!-- Person 4 -->
+                <div class="team-card bg-white rounded-2xl overflow-hidden shadow-md border border-green-100">
+                    <div class="team-avatar h-40 flex items-center justify-center relative"
+                        style="background:linear-gradient(135deg,#0d2b1f,#2e7d52);">
+                        <svg class="w-20 h-20 opacity-30" viewBox="0 0 80 80" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="30" r="16" fill="#c9a84c" />
+                            <path d="M10,75 Q10,52 40,52 Q70,52 70,75Z" fill="#c9a84c" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <p class="arabic-title text-yellow-400/50 text-4xl">س</p>
+                        </div>
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="font-['Cinzel'] text-deep-green font-bold text-base mb-0.5">Ust. Syahrul Ramadhan</p>
+                        <p class="text-yellow-600 text-xs tracking-widest uppercase">Koordinator Ibadah</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── AYAT BANNER ── -->
+    <section class="geo-bg py-16">
+        <div class="max-w-2xl mx-auto px-6 text-center">
+            <p class="arabic-title text-yellow-400 text-3xl leading-loose mb-5">إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ
+                لَلَّذِي بِبَكَّةَ مُبَارَكًا</p>
+            <div class="gold-divider w-16 mx-auto mb-5"></div>
+            <p class="text-cream/60 text-sm italic leading-relaxed">"Sesungguhnya rumah yang pertama kali dibangun untuk
+                manusia ialah Baitullah di Bakkah yang diberkahi."</p>
+            <p class="text-yellow-500/50 text-xs mt-3 tracking-wide">— QS. Ali Imran: 96</p>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="geo-bg pt-14 pb-6">
+        <div class="gold-divider mb-12"></div>
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-5">
+                        <svg width="36" height="36" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="21" cy="21" r="20" fill="none" stroke="#c9a84c" stroke-width="1" />
+                            <path d="M26,9 A13,13 0 1,0 26,33 A9,9 0 1,1 26,9Z" fill="#c9a84c" opacity="0.9" />
+                            <polygon
+                                points="30,14 31.2,17.6 35,17.6 32,19.8 33.2,23.4 30,21.2 26.8,23.4 28,19.8 25,17.6 28.8,17.6"
+                                fill="#c9a84c" />
+                        </svg>
+                        <p class="font-['Cinzel'] text-yellow-400 font-bold text-lg">Baiturrahman</p>
+                    </div>
+                    <p class="text-cream/50 text-sm leading-relaxed">Masjid Baiturrahman — pusat ibadah, ilmu, dan
+                        silaturahmi umat Muslim di Aceh sejak abad ke-17.</p>
+                </div>
+                <div>
+                    <p class="text-yellow-400/80 text-xs tracking-widest uppercase font-semibold mb-5">Navigasi</p>
+                    <ul class="space-y-2.5">
+                        <li><a href="index.html" class="text-cream/50 hover:text-yellow-400 text-sm transition">Home</a>
+                        </li>
+                        <li><a href="about.html" class="text-yellow-400 text-sm">About</a></li>
+                        <li><a href="index.html#prayers"
+                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Jadwal Sholat</a></li>
+                        <li><a href="index.html#blog"
+                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Pengajian</a></li>
+                        <li><a href="index.html#gallery"
+                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Gallery</a></li>
+                        <li><a href="contact.html"
+                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-yellow-400/80 text-xs tracking-widest uppercase font-semibold mb-5">Kontak</p>
+                    <p class="text-cream/50 text-sm mb-2">Jl. Masjid Raya No. 1<br />Banda Aceh, Aceh 23122</p>
+                    <p class="text-cream/50 text-sm">+62 651 123 4567</p>
+                    <p class="text-cream/50 text-sm">info@masjid-baiturrahman.id</p>
+                </div>
+            </div>
+            <div class="gold-divider mb-6"></div>
+            <p class="text-center text-cream/30 text-xs tracking-wide">© 2025 Masjid Baiturrahman · Banda Aceh · Dibuat
+                dengan <span class="text-yellow-600">❤</span> untuk kemaslahatan umat</p>
+        </div>
+    </footer>
+
+    <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        class="fixed bottom-6 right-6 geo-bg text-yellow-400 border border-yellow-500/40 w-11 h-11 rounded-full flex items-center justify-center shadow-xl z-40 hover:bg-yellow-600 hover:text-green-950 transition-all duration-300 opacity-0 pointer-events-none">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+    <script>
+        const btn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            btn.style.opacity = window.scrollY > 300 ? '1' : '0';
+            btn.style.pointerEvents = window.scrollY > 300 ? 'auto' : 'none';
+        });
+    </script>
+</body>
+
+</html>
