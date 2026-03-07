@@ -1,294 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kontak — Masjid Baiturrahman</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&display=swap"
-        rel="stylesheet" />
-    <style>
-        :root {
-            --gold: #c9a84c;
-            --gold-light: #e8c97a;
-            --deep-green: #0d2b1f;
-            --mid-green: #1a4a30;
-            --light-green: #2e7d52;
-            --cream: #f7f2e8;
-            --warm-white: #fdfaf3;
-        }
-
-        * {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: var(--warm-white);
-            color: var(--deep-green);
-        }
-
-        .geo-bg {
-            background-color: var(--deep-green);
-            background-image:
-                radial-gradient(circle at 25% 25%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(201, 168, 76, 0.06) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.4' opacity='0.18'%3E%3Cpolygon points='40,4 76,22 76,58 40,76 4,58 4,22'/%3E%3Cpolygon points='40,14 66,28 66,52 40,66 14,52 14,28'/%3E%3Cline x1='40' y1='4' x2='40' y2='14'/%3E%3Cline x1='76' y1='22' x2='66' y2='28'/%3E%3Cline x1='76' y1='58' x2='66' y2='52'/%3E%3Cline x1='40' y1='76' x2='40' y2='66'/%3E%3Cline x1='4' y1='58' x2='14' y2='52'/%3E%3Cline x1='4' y1='22' x2='14' y2='28'/%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .gold-divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
-        }
-
-        .nav-link {
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 0;
-            height: 1.5px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .section-title {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.06em;
-        }
-
-        .arabic-title {
-            font-family: 'Amiri', serif;
-            direction: rtl;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(28px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-up {
-            animation: fadeUp 0.75s ease both;
-        }
-
-        .delay-1 {
-            animation-delay: 0.15s;
-        }
-
-        .delay-2 {
-            animation-delay: 0.30s;
-        }
-
-        /* Page hero */
-        .page-hero-bg {
-            background-color: var(--deep-green);
-            background-image:
-                radial-gradient(ellipse at 70% 50%, rgba(201, 168, 76, 0.1) 0%, transparent 55%),
-                radial-gradient(ellipse at 30% 50%, rgba(46, 125, 82, 0.12) 0%, transparent 55%),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.35' opacity='0.12'%3E%3Crect x='10' y='10' width='40' height='40' rx='2'/%3E%3Crect x='20' y='20' width='20' height='20' rx='2'/%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        /* Info card */
-        .info-card {
-            border-top: 3px solid var(--gold);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .info-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(13, 43, 31, 0.12);
-        }
-
-        /* Input fields */
-        .form-input {
-            width: 100%;
-            border: 1.5px solid #d1e8d9;
-            border-radius: 0.75rem;
-            padding: 0.875rem 1.1rem;
-            font-size: 0.9rem;
-            color: var(--deep-green);
-            background: white;
-            transition: border-color 0.25s, box-shadow 0.25s;
-            outline: none;
-            font-family: 'Lato', sans-serif;
-        }
-
-        .form-input::placeholder {
-            color: #a0b8ab;
-        }
-
-        .form-input:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
-        }
-
-        .form-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #2e7d52;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Map placeholder */
-        .map-container {
-            background: linear-gradient(135deg, var(--deep-green), var(--mid-green));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .map-container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.3' opacity='0.15'%3E%3Crect x='5' y='5' width='30' height='30'/%3E%3Cline x1='20' y1='5' x2='20' y2='35'/%3E%3Cline x1='5' y1='20' x2='35' y2='20'/%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        /* FAQ accordion */
-        .faq-item {
-            border-bottom: 1px solid rgba(13, 43, 31, 0.08);
-        }
-
-        .faq-answer {
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            max-height: 0;
-        }
-
-        .faq-answer.open {
-            max-height: 200px;
-        }
-
-        .faq-icon {
-            transition: transform 0.3s;
-        }
-
-        .faq-icon.open {
-            transform: rotate(45deg);
-        }
-
-        /* Social button */
-        .social-btn {
-            transition: transform 0.25s, background 0.25s, border-color 0.25s;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Success toast */
-        .toast {
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        #scrollTop {
-            transition: opacity 0.3s, transform 0.3s;
-        }
-
-        #scrollTop:hover {
-            transform: translateY(-3px);
-        }
-    </style>
-</head>
-
-<body x-data="{ menuOpen: false, activeTab: 'umum', openFaq: null, formSent: false }">
-
-    <!-- ── NAVBAR ── -->
-    <nav class="geo-bg fixed top-0 left-0 right-0 z-50 shadow-xl">
-        <div class="gold-divider absolute bottom-0 left-0 right-0"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <a href="index.html" class="flex items-center gap-3">
-                    <svg width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="21" cy="21" r="20" fill="none" stroke="#c9a84c" stroke-width="1" />
-                        <path d="M26,9 A13,13 0 1,0 26,33 A9,9 0 1,1 26,9Z" fill="#c9a84c" opacity="0.9" />
-                        <polygon
-                            points="30,14 31.2,17.6 35,17.6 32,19.8 33.2,23.4 30,21.2 26.8,23.4 28,19.8 25,17.6 28.8,17.6"
-                            fill="#c9a84c" />
-                    </svg>
-                    <div>
-                        <p class="text-xs text-yellow-300/70 tracking-widest uppercase font-light leading-none">Masjid
-                        </p>
-                        <p class="font-['Cinzel'] text-yellow-400 font-bold text-lg leading-tight tracking-wide">
-                            Baiturrahman</p>
-                    </div>
-                </a>
-                <div class="hidden md:flex items-center gap-7">
-                    <a href="index.html"
-                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Home</a>
-                    <a href="about.html"
-                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">About</a>
-                    <a href="index.html#prayers"
-                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Prayer
-                        Times</a>
-                    <a href="index.html#blog"
-                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Pengajian</a>
-                    <a href="index.html#gallery"
-                        class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Gallery</a>
-                    <a href="contact.html"
-                        class="bg-yellow-600/20 border border-yellow-500/50 text-yellow-400 hover:bg-yellow-500 hover:text-green-950 text-sm font-semibold tracking-wider uppercase px-5 py-2 rounded transition-all duration-300">Contact</a>
-                </div>
-                <button @click="menuOpen=!menuOpen"
-                    class="md:hidden text-yellow-400 p-2 rounded hover:bg-white/10 transition">
-                    <svg x-show="!menuOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <svg x-show="menuOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <div x-show="menuOpen" x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
-            x-transition:leave-end="opacity-0 -translate-y-2"
-            class="md:hidden geo-bg border-t border-yellow-500/20 px-4 pb-5 pt-3 space-y-1">
-            <a href="index.html" @click="menuOpen=false"
-                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Home</a>
-            <a href="about.html" @click="menuOpen=false"
-                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">About</a>
-            <a href="index.html#prayers" @click="menuOpen=false"
-                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Prayer
-                Times</a>
-            <a href="index.html#blog" @click="menuOpen=false"
-                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Pengajian</a>
-            <a href="index.html#gallery" @click="menuOpen=false"
-                class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Gallery</a>
-            <a href="contact.html" @click="menuOpen=false"
-                class="block py-2.5 px-4 text-yellow-400 border border-yellow-500/40 rounded font-medium tracking-wider uppercase text-sm mt-2 hover:bg-yellow-500/20 transition">Contact</a>
-        </div>
-    </nav>
+{{ define "content" }}
 
     <!-- ── PAGE HERO ── -->
     <section
@@ -403,42 +113,41 @@
                     </div>
 
                     <!-- Form fields -->
-                    <div x-show="!formSent"
-                        class="space-y-5 bg-white rounded-2xl shadow-md border border-green-100 p-8">
+                    <form hx-post="/contact" hx-swap="outerHTML" class="space-y-5 bg-white rounded-2xl shadow-md border border-green-100 p-8">
                         <div class="grid sm:grid-cols-2 gap-5">
                             <div>
                                 <label class="form-label">Nama Lengkap</label>
-                                <input type="text" placeholder="Nama Anda" class="form-input" />
+                                <input type="text" name="name" placeholder="Nama Anda" class="form-input" required />
                             </div>
                             <div>
                                 <label class="form-label">No. Telepon</label>
-                                <input type="tel" placeholder="+62 8xx xxxx xxxx" class="form-input" />
+                                <input type="tel" name="phone" placeholder="+62 8xx xxxx xxxx" class="form-input" />
                             </div>
                         </div>
                         <div>
                             <label class="form-label">Email</label>
-                            <input type="email" placeholder="email@contoh.com" class="form-input" />
+                            <input type="email" name="email" placeholder="email@contoh.com" class="form-input" required />
                         </div>
                         <div>
                             <label class="form-label">Topik</label>
-                            <select class="form-input appearance-none cursor-pointer">
-                                <option x-show="activeTab==='umum'" value="">-- Pilih Topik --</option>
-                                <option>Informasi Umum</option>
-                                <option x-show="activeTab==='program'">Jadwal Kajian</option>
-                                <option x-show="activeTab==='program'">Pendaftaran TPA</option>
-                                <option x-show="activeTab==='donasi'">Informasi Donasi</option>
-                                <option x-show="activeTab==='donasi'">Pembayaran Zakat</option>
-                                <option x-show="activeTab==='kunjungan'">Kunjungan Wisata</option>
-                                <option x-show="activeTab==='kunjungan'">Kunjungan Studi</option>
-                                <option>Lainnya</option>
+                            <select name="topic" class="form-input appearance-none cursor-pointer">
+                                <option value="">-- Pilih Topik --</option>
+                                <option value="Informasi Umum" {{if eq .Topic "Informasi Umum"}}selected{{end}}>Informasi Umum</option>
+                                <option value="Jadwal Kajian" {{if eq .Topic "Jadwal Kajian"}}selected{{end}}>Jadwal Kajian</option>
+                                <option value="Pendaftaran TPA" {{if eq .Topic "Pendaftaran TPA"}}selected{{end}}>Pendaftaran TPA</option>
+                                <option value="Informasi Donasi" {{if eq .Topic "Informasi Donasi"}}selected{{end}}>Informasi Donasi</option>
+                                <option value="Pembayaran Zakat" {{if eq .Topic "Pembayaran Zakat"}}selected{{end}}>Pembayaran Zakat</option>
+                                <option value="Kunjungan Wisata" {{if eq .Topic "Kunjungan Wisata"}}selected{{end}}>Kunjungan Wisata</option>
+                                <option value="Kunjungan Studi" {{if eq .Topic "Kunjungan Studi"}}selected{{end}}>Kunjungan Studi</option>
+                                <option value="Lainnya" {{if eq .Topic "Lainnya"}}selected{{end}}>Lainnya</option>
                             </select>
                         </div>
                         <div>
                             <label class="form-label">Pesan</label>
-                            <textarea rows="5" placeholder="Tuliskan pesan Anda di sini..."
-                                class="form-input resize-none"></textarea>
+                            <textarea name="message" rows="5" placeholder="Tuliskan pesan Anda di sini..."
+                                class="form-input resize-none" required></textarea>
                         </div>
-                        <button @click="formSent=true"
+                        <button type="submit"
                             class="w-full bg-deep-green hover:bg-mid-green text-cream font-bold tracking-widest uppercase text-sm py-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-green-900/20 hover:shadow-lg flex items-center justify-center gap-2">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -446,26 +155,7 @@
                             </svg>
                             Kirim Pesan
                         </button>
-                    </div>
-
-                    <!-- Success state -->
-                    <div x-show="formSent" x-transition:enter="transition ease-out duration-400"
-                        x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                        class="bg-white rounded-2xl shadow-md border border-green-100 p-12 text-center">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
-                            <svg class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                        <h3 class="font-['Cinzel'] text-deep-green text-xl font-bold mb-3">Jazakallahu Khairan!</h3>
-                        <p class="text-mid-green/70 text-sm leading-relaxed mb-6">Pesan Anda telah kami terima. Tim kami
-                            akan menghubungi Anda dalam 1×24 jam, insyaAllah.</p>
-                        <button @click="formSent=false"
-                            class="border-2 border-deep-green/20 text-mid-green hover:border-yellow-500 hover:text-yellow-600 text-xs font-semibold tracking-widest uppercase px-6 py-2.5 rounded-lg transition">
-                            Kirim Pesan Lain
-                        </button>
-                    </div>
+                    </form>
                 </div>
 
                 <!-- Map + directions -->
@@ -758,66 +448,4 @@
     </section>
 
     <!-- ── FOOTER ── -->
-    <footer class="geo-bg pt-14 pb-6">
-        <div class="gold-divider mb-12"></div>
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-10 mb-12">
-                <div>
-                    <div class="flex items-center gap-3 mb-5">
-                        <svg width="36" height="36" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="21" cy="21" r="20" fill="none" stroke="#c9a84c" stroke-width="1" />
-                            <path d="M26,9 A13,13 0 1,0 26,33 A9,9 0 1,1 26,9Z" fill="#c9a84c" opacity="0.9" />
-                            <polygon
-                                points="30,14 31.2,17.6 35,17.6 32,19.8 33.2,23.4 30,21.2 26.8,23.4 28,19.8 25,17.6 28.8,17.6"
-                                fill="#c9a84c" />
-                        </svg>
-                        <p class="font-['Cinzel'] text-yellow-400 font-bold text-lg">Baiturrahman</p>
-                    </div>
-                    <p class="text-cream/50 text-sm leading-relaxed">Masjid Baiturrahman — pusat ibadah, ilmu, dan
-                        silaturahmi umat Muslim di Aceh sejak abad ke-17.</p>
-                </div>
-                <div>
-                    <p class="text-yellow-400/80 text-xs tracking-widest uppercase font-semibold mb-5">Navigasi</p>
-                    <ul class="space-y-2.5">
-                        <li><a href="index.html" class="text-cream/50 hover:text-yellow-400 text-sm transition">Home</a>
-                        </li>
-                        <li><a href="about.html"
-                                class="text-cream/50 hover:text-yellow-400 text-sm transition">About</a></li>
-                        <li><a href="index.html#prayers"
-                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Jadwal Sholat</a></li>
-                        <li><a href="index.html#blog"
-                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Pengajian</a></li>
-                        <li><a href="index.html#gallery"
-                                class="text-cream/50 hover:text-yellow-400 text-sm transition">Gallery</a></li>
-                        <li><a href="contact.html" class="text-yellow-400 text-sm">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <p class="text-yellow-400/80 text-xs tracking-widest uppercase font-semibold mb-5">Kontak Cepat</p>
-                    <p class="text-cream/50 text-sm mb-2">Jl. Masjid Raya No. 1<br />Banda Aceh, Aceh 23122</p>
-                    <p class="text-cream/50 text-sm">+62 651 123 4567</p>
-                    <p class="text-cream/50 text-sm">info@masjid-baiturrahman.id</p>
-                </div>
-            </div>
-            <div class="gold-divider mb-6"></div>
-            <p class="text-center text-cream/30 text-xs tracking-wide">© 2025 Masjid Baiturrahman · Banda Aceh · Dibuat
-                dengan <span class="text-yellow-600">❤</span> untuk kemaslahatan umat</p>
-        </div>
-    </footer>
-
-    <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
-        class="fixed bottom-6 right-6 geo-bg text-yellow-400 border border-yellow-500/40 w-11 h-11 rounded-full flex items-center justify-center shadow-xl z-40 hover:bg-yellow-600 hover:text-green-950 transition-all duration-300 opacity-0 pointer-events-none">
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-        </svg>
-    </button>
-    <script>
-        const btn = document.getElementById('scrollTop');
-        window.addEventListener('scroll', () => {
-            btn.style.opacity = window.scrollY > 300 ? '1' : '0';
-            btn.style.pointerEvents = window.scrollY > 300 ? 'auto' : 'none';
-        });
-    </script>
-</body>
-
-</html>
+{{ end }}

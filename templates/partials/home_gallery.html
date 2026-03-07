@@ -1,0 +1,56 @@
+{{ define "home_gallery.html" }}
+<section id="gallery" class="py-24 bg-warm-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <p class="text-center text-yellow-600 text-xs tracking-widest uppercase mb-3">Dokumentasi</p>
+        <h2 class="section-title text-center text-deep-green text-3xl md:text-4xl font-bold mb-2">Galeri</h2>
+        <div class="gold-divider w-20 mx-auto mb-12"></div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <!-- Gallery items using SVG placeholders -->
+            <div class="gallery-item rounded-xl overflow-hidden col-span-2 md:col-span-1 row-span-2 shadow-md">
+                <div class="geo-bg w-full h-full min-h-72 flex items-center justify-center">
+                    <div class="text-center">
+                        <p class="arabic-title text-yellow-400/60 text-5xl mb-2">مسجد</p>
+                        <p class="text-cream/30 text-xs tracking-widest uppercase">Foto Masjid</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item rounded-xl overflow-hidden shadow-md">
+                <div class="h-48 flex items-center justify-center"
+                    style="background: linear-gradient(135deg, #1a4a30, #0d2b1f);">
+                    <p class="text-yellow-400/40 text-xs tracking-widest uppercase text-center px-4">Kegiatan
+                        Ramadhan</p>
+                </div>
+            </div>
+            <div class="gallery-item rounded-xl overflow-hidden shadow-md">
+                <div class="h-48 flex items-center justify-center"
+                    style="background: linear-gradient(135deg, #2e7d52, #1a4a30);">
+                    <p class="text-yellow-400/40 text-xs tracking-widest uppercase text-center px-4">Kajian Subuh
+                    </p>
+                </div>
+            </div>
+            <div class="gallery-item rounded-xl overflow-hidden shadow-md">
+                <div class="h-48 flex items-center justify-center"
+                    style="background: linear-gradient(135deg, #0d2b1f, #2e7d52);">
+                    <p class="text-yellow-400/40 text-xs tracking-widest uppercase text-center px-4">Sholat Jum'at
+                    </p>
+                </div>
+            </div>
+            <div class="gallery-item rounded-xl overflow-hidden shadow-md">
+                <div class="h-48 flex items-center justify-center"
+                    style="background: linear-gradient(135deg, #1a4a30, #2e7d52);">
+                    <p class="text-yellow-400/40 text-xs tracking-widest uppercase text-center px-4">Buka Puasa
+                        Bersama</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-10">
+            <a href="#"
+                class="inline-block bg-deep-green hover:bg-mid-green text-cream font-semibold text-sm tracking-widest uppercase px-10 py-3 rounded transition-all duration-300">
+                Lihat Semua Foto
+            </a>
+        </div>
+    </div>
+</section>
+{{ end }}

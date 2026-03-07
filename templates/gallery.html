@@ -1,0 +1,281 @@
+{{ define "content" }}
+<div x-data="{
+    activeFilter: 'semua',
+    lightboxOpen: false,
+    lightboxIndex: 0,
+    photos: [
+        { title: 'Shalat Idul Fitri', sub: '1 Syawal 1445 H', arabic: 'عِيدُ الْفِطْر', cat: 'ibadah', palette: ['#1a4a30', '#2e7d52'], aspect: 'wide' },
+        { title: 'Kajian Subuh', sub: 'Masjid Raya', arabic: 'مَجْلِسُ الْعِلْم', cat: 'pendidikan', palette: ['#c9a84c', '#e0c060'], aspect: 'tall' },
+        { title: 'Buka Puasa Bersama', sub: 'Ramadhan Berkah', arabic: 'إِفْطَار', cat: 'ramadhan', palette: ['#8c6a28', '#b5904b'], aspect: 'square' },
+        { title: 'Santunan Yatim', sub: 'Jumat Berkah', arabic: 'صَدَقَة', cat: 'sosial', palette: ['#1a4a30', '#2e7d52'], aspect: 'wide' },
+        { title: 'Arsitektur Kubah', sub: 'Detail Masjid', arabic: 'عِمَارَة', cat: 'masjid', palette: ['#0d2b1f', '#1a4a30'], aspect: 'tall' },
+        { title: 'Tadarus Al-Quran', sub: 'Malam Lailatul Qadar', arabic: 'تَدَارُس', cat: 'ibadah', palette: ['#c9a84c', '#f0d070'], aspect: 'square' }
+    ],
+    get filtered() {
+        if (this.activeFilter === 'semua') return this.photos;
+        return this.photos.filter(p => p.cat === this.activeFilter);
+    },
+    openLightbox(idx) {
+        this.lightboxIndex = idx;
+        this.lightboxOpen = true;
+    }
+}">
+
+    <!-- ── PAGE HERO ── -->
+    <section
+        class="page-hero-bg pt-20 min-h-[52vh] flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[600px] h-[600px] rounded-full border border-yellow-500/5 absolute"></div>
+            <div class="w-[350px] h-[350px] rounded-full border border-yellow-500/7 absolute"></div>
+        </div>
+        <!-- Decorative camera icon -->
+        <div class="absolute right-16 top-1/2 -translate-y-1/2 opacity-5 hidden lg:block">
+            <svg class="w-72 h-72 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M12 9a3 3 0 100 6 3 3 0 000-6zm0-2a5 5 0 110 10A5 5 0 0112 7zm6.5-4A1.5 1.5 0 0120 4.5V5h1a2 2 0 012 2v11a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2h1v-.5A1.5 1.5 0 015.5 3h3A1.5 1.5 0 0110 4.5V5h4v-.5A1.5 1.5 0 0115.5 3h3z" />
+            </svg>
+        </div>
+        <div class="relative z-10 px-6 py-16">
+            <p class="arabic-title text-yellow-400/60 text-3xl mb-3 fade-up">مَعْرَضُ الصُّوَر</p>
+            <h1 class="section-title text-5xl md:text-6xl font-bold text-cream mb-4 fade-up delay-1">Galeri <span
+                    class="text-yellow-400">Foto</span></h1>
+            <div class="gold-divider w-28 mx-auto mb-5 fade-up delay-2"></div>
+            <p class="text-cream/50 text-sm tracking-widest uppercase fade-up delay-2">Masjid · Ibadah · Ramadhan ·
+                Pendidikan · Sosial</p>
+        </div>
+        <!-- Stats pills -->
+        <div class="relative z-10 flex flex-wrap justify-center gap-3 px-6 pb-12 fade-up delay-2">
+            <div class="stat-pill rounded-full px-4 py-1.5 text-xs text-yellow-400/70 tracking-widest uppercase">15 Foto
+            </div>
+            <div class="stat-pill rounded-full px-4 py-1.5 text-xs text-yellow-400/70 tracking-widest uppercase">5
+                Kategori</div>
+            <div class="stat-pill rounded-full px-4 py-1.5 text-xs text-yellow-400/70 tracking-widest uppercase">Terus
+                Diperbarui</div>
+        </div>
+        <div
+            class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 text-xs text-cream/30 tracking-widest uppercase">
+            <a href="index.html" class="hover:text-yellow-400 transition">Home</a>
+            <span>›</span>
+            <span class="text-yellow-400/70">Gallery</span>
+        </div>
+    </section>
+
+    <!-- ── FILTER BAR ── -->
+    <section class="bg-warm-white sticky top-20 z-40 border-b border-green-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center gap-3 overflow-x-auto scrollbar-hide">
+            <span
+                class="text-xs text-mid-green/50 font-semibold tracking-widest uppercase flex-shrink-0 mr-2">Filter:</span>
+            <template x-for="f in [
+        {key:'semua',    label:'Semua'},
+        {key:'masjid',   label:'Masjid'},
+        {key:'ibadah',   label:'Ibadah'},
+        {key:'ramadhan', label:'Ramadhan'},
+        {key:'pendidikan',label:'Pendidikan'},
+        {key:'sosial',   label:'Sosial'}
+      ]">
+                <button @click="activeFilter = f.key"
+                    :class="activeFilter === f.key ? 'bg-deep-green text-cream border-deep-green' : 'bg-white text-mid-green border-green-200'"
+                    class="filter-btn flex-shrink-0 border rounded-full px-5 py-1.5 text-xs font-semibold tracking-widest uppercase"
+                    x-text="f.label">
+                </button>
+            </template>
+            <!-- Count badge -->
+            <span class="ml-auto flex-shrink-0 text-xs text-mid-green/40 tracking-wide"
+                x-text="filtered.length + ' foto'"></span>
+        </div>
+    </section>
+
+    <!-- ── MASONRY GALLERY ── -->
+    <section class="py-12 bg-warm-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <!-- Empty state -->
+            <div x-show="filtered.length === 0" class="text-center py-24">
+                <p class="arabic-title text-gray-300 text-5xl mb-4">لا توجد صور</p>
+                <p class="text-mid-green/40 text-sm tracking-widest uppercase">Tidak ada foto dalam kategori ini</p>
+            </div>
+
+            <div class="masonry-grid" x-show="filtered.length > 0">
+                <template x-for="(photo, idx) in filtered" :key="photo.title">
+                    <div class="masonry-item" @click="openLightbox(idx)">
+                        <!-- SVG placeholder image -->
+                        <div class="img-inner relative"
+                            :style="`background: linear-gradient(135deg, ${photo.palette[0]}, ${photo.palette[1]})`">
+                            <!-- Aspect ratio padding trick -->
+                            <div
+                                :style="photo.aspect === 'tall' ? 'padding-bottom:140%' : photo.aspect === 'wide' ? 'padding-bottom:62%' : 'padding-bottom:100%'">
+                            </div>
+                            <!-- Content -->
+                            <div class="absolute inset-0 flex flex-col items-center justify-center"
+                                :style="`background: linear-gradient(135deg, ${photo.palette[0]}, ${photo.palette[1]}); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Cg fill=%22none%22 stroke=%22%23c9a84c%22 stroke-width=%220.3%22 opacity=%220.1%22%3E%3Cpolygon points=%2230,3 57,16 57,44 30,57 3,44 3,16%22/%3E%3Cpolygon points=%2230,10 50,20 50,40 30,50 10,40 10,20%22/%3E%3C/g%3E%3C/svg%3E')`">
+                                <p class="arabic-title text-yellow-400/40 text-4xl mb-1 select-none"
+                                    x-text="photo.arabic"></p>
+                                <div class="w-8 h-px bg-yellow-500/20 mx-auto mb-1"></div>
+                                <p class="text-cream/20 text-xs tracking-widest uppercase text-center px-4 select-none"
+                                    x-text="photo.sub"></p>
+                            </div>
+                            <!-- Category badge -->
+                            <div class="absolute top-3 left-3 z-10">
+                                <span
+                                    class="bg-deep-green/70 backdrop-blur-sm border border-yellow-500/30 text-yellow-400/80 text-xs tracking-widest uppercase px-2.5 py-1 rounded-full"
+                                    x-text="photo.cat"></span>
+                            </div>
+                            <!-- Zoom icon -->
+                            <div
+                                class="absolute top-3 right-3 z-10 w-8 h-8 bg-deep-green/60 backdrop-blur-sm rounded-full flex items-center justify-center border border-yellow-500/20 opacity-0 group-hover:opacity-100 transition">
+                                <svg class="w-3.5 h-3.5 text-yellow-400" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                </svg>
+                            </div>
+                        </div>
+                        <!-- Overlay on hover -->
+                        <div class="overlay">
+                            <p class="font-['Cinzel'] text-cream text-sm font-semibold leading-snug"
+                                x-text="photo.title"></p>
+                            <p class="text-cream/50 text-xs mt-0.5" x-text="photo.sub"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Load more (decorative) -->
+            <div class="text-center mt-14">
+                <button
+                    class="border-2 border-deep-green/20 hover:border-yellow-500 text-mid-green hover:text-yellow-600 font-semibold text-xs tracking-widest uppercase px-10 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 mx-auto">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Muat Lebih Banyak
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── VIDEO SECTION ── -->
+    <section class="geo-bg py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="text-center text-yellow-400/70 text-xs tracking-widest uppercase mb-3">Dokumentasi Video</p>
+            <h2 class="section-title text-center text-cream text-2xl md:text-3xl font-bold mb-10">Video Pilihan</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <template x-for="v in [
+          {title:'Profil Masjid Baiturrahman', dur:'5:42', cat:'Profil'},
+          {title:'Ceramah Idul Fitri 1445 H',   dur:'28:17', cat:'Ceramah'},
+          {title:'Tahfizh Anak-anak Berprestasi',dur:'12:05', cat:'Pendidikan'}
+        ]">
+                    <div class="relative rounded-2xl overflow-hidden cursor-pointer group bg-mid-green">
+                        <div class="aspect-video flex items-center justify-center relative"
+                            style="background: linear-gradient(135deg, #0d2b1f, #1a4a30);">
+                            <!-- Decorative pattern -->
+                            <div class="absolute inset-0 opacity-10"
+                                style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Cg fill=%22none%22 stroke=%22%23c9a84c%22 stroke-width=%220.4%22 opacity=%221%22%3E%3Crect x=%225%22 y=%225%22 width=%2230%22 height=%2230%22 rx=%222%22/%3E%3C/g%3E%3C/svg%3E');">
+                            </div>
+                            <!-- Play button -->
+                            <div
+                                class="w-14 h-14 bg-yellow-500/20 border-2 border-yellow-400/60 rounded-full flex items-center justify-center group-hover:bg-yellow-500/40 group-hover:scale-110 transition-all duration-300">
+                                <svg class="w-6 h-6 text-yellow-400 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                            <!-- Duration badge -->
+                            <div class="absolute bottom-3 right-3 bg-deep-green/80 text-yellow-400/80 text-xs px-2 py-0.5 rounded font-medium"
+                                x-text="v.dur"></div>
+                            <!-- Cat badge -->
+                            <div class="absolute top-3 left-3 bg-yellow-500/20 border border-yellow-500/40 text-yellow-400/80 text-xs tracking-widest uppercase px-2.5 py-1 rounded-full"
+                                x-text="v.cat"></div>
+                        </div>
+                        <div class="p-4">
+                            <p class="font-['Cinzel'] text-cream/90 text-sm font-semibold" x-text="v.title"></p>
+                            <p class="text-cream/40 text-xs mt-1 tracking-wide">Masjid Baiturrahman</p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="text-center mt-8">
+                <a href="#"
+                    class="inline-flex items-center gap-2 border border-yellow-500/40 text-yellow-400 hover:bg-yellow-500/10 text-xs font-semibold tracking-widest uppercase px-7 py-3 rounded-xl transition">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                    Lihat di YouTube
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── UPLOAD / CONTRIBUTE ── -->
+    <section class="py-16" style="background:#eef7f0;">
+        <div class="max-w-2xl mx-auto px-6 text-center">
+            <div class="w-14 h-14 mx-auto mb-5 rounded-2xl flex items-center justify-center"
+                style="background:linear-gradient(135deg,#1a4a30,#2e7d52);">
+                <svg class="w-7 h-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+            </div>
+            <h3 class="section-title text-deep-green text-2xl font-bold mb-3">Punya Foto Masjid?</h3>
+            <div class="gold-divider w-16 mx-auto mb-5"></div>
+            <p class="text-mid-green/70 text-sm leading-relaxed mb-7">Kami mengundang jamaah dan pengunjung untuk
+                berbagi dokumentasi kegiatan di Masjid Baiturrahman. Kirimkan foto terbaik Anda untuk ditampilkan di
+                galeri resmi ini.</p>
+            <a href="contact.html"
+                class="inline-block bg-deep-green hover:bg-mid-green text-cream font-bold text-xs tracking-widest uppercase px-10 py-3.5 rounded-xl transition-all duration-300 shadow-md">
+                Kirim Foto Anda
+            </a>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div x-show="lightboxOpen"
+        class="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 backdrop-blur-sm"
+        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+        @keydown.escape.window="lightboxOpen = false" style="display: none;">
+
+        <!-- Close button -->
+        <button @click="lightboxOpen = false" class="absolute top-5 right-5 text-white/50 hover:text-white z-50">
+            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <!-- Prev button -->
+        <button @click="lightboxIndex = (lightboxIndex - 1 + filtered.length) % filtered.length"
+            class="absolute left-5 text-white/50 hover:text-white z-50 hidden md:block">
+            <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        <!-- Next button -->
+        <button @click="lightboxIndex = (lightboxIndex + 1) % filtered.length"
+            class="absolute right-5 text-white/50 hover:text-white z-50 hidden md:block">
+            <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+
+        <!-- Content -->
+        <div class="max-w-5xl w-full p-4 flex flex-col items-center" @click.outside="lightboxOpen = false">
+            <div
+                class="relative w-full aspect-video md:aspect-[16/9] bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center mb-4">
+                <div class="absolute inset-0"
+                    :style="`background: linear-gradient(135deg, ${filtered[lightboxIndex]?.palette[0]}, ${filtered[lightboxIndex]?.palette[1]})`">
+                </div>
+                <p class="arabic-title text-yellow-400/20 text-6xl md:text-8xl select-none relative z-10"
+                    x-text="filtered[lightboxIndex]?.arabic"></p>
+                <div class="absolute bottom-4 left-4 text-white z-20">
+                    <h3 class="font-['Cinzel'] text-2xl text-yellow-400 font-bold mb-1"
+                        x-text="filtered[lightboxIndex]?.title"></h3>
+                    <p class="text-white/60 text-sm tracking-widest uppercase" x-text="filtered[lightboxIndex]?.sub">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{{ end }}

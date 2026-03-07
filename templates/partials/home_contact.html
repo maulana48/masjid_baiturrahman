@@ -1,0 +1,99 @@
+{{ define "home_contact.html" }}
+<section id="contact" class="py-24" style="background: #eef7f0;">
+    <div class="max-w-6xl mx-auto px-6">
+        <p class="text-center text-yellow-600 text-xs tracking-widest uppercase mb-3">Hubungi Kami</p>
+        <h2 class="section-title text-center text-deep-green text-3xl md:text-4xl font-bold mb-2">Kontak</h2>
+        <div class="gold-divider w-20 mx-auto mb-14"></div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+
+            <!-- Info -->
+            <div class="space-y-8">
+                <div class="flex gap-5 items-start">
+                    <div class="geo-bg rounded-xl p-3.5 flex-shrink-0">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-['Cinzel'] text-deep-green font-semibold mb-1">Alamat</p>
+                        <p class="text-mid-green/70 text-sm leading-relaxed">Jl. Masjid Raya No. 1<br />Banda Aceh,
+                            Aceh 23122<br />Indonesia</p>
+                    </div>
+                </div>
+                <div class="flex gap-5 items-start">
+                    <div class="geo-bg rounded-xl p-3.5 flex-shrink-0">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-['Cinzel'] text-deep-green font-semibold mb-1">Telepon</p>
+                        <p class="text-mid-green/70 text-sm">+62 651 123 4567</p>
+                    </div>
+                </div>
+                <div class="flex gap-5 items-start">
+                    <div class="geo-bg rounded-xl p-3.5 flex-shrink-0">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-['Cinzel'] text-deep-green font-semibold mb-1">Email</p>
+                        <p class="text-mid-green/70 text-sm">info@masjid-baiturrahman.id</p>
+                    </div>
+                </div>
+                <div class="flex gap-5 items-start">
+                    <div class="geo-bg rounded-xl p-3.5 flex-shrink-0">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-['Cinzel'] text-deep-green font-semibold mb-1">Jam Operasional</p>
+                        <p class="text-mid-green/70 text-sm">Setiap hari, 24 jam<br />(Kantor: 08.00 – 17.00 WIB)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-green-100">
+                <h3 class="font-['Cinzel'] text-deep-green font-bold text-xl mb-6">Kirim Pesan</h3>
+                <div class="space-y-5">
+                    <div>
+                        <label
+                            class="text-xs font-semibold text-mid-green/70 tracking-widest uppercase block mb-1.5">Nama
+                            Lengkap</label>
+                        <input type="text" placeholder="Masukkan nama Anda"
+                            class="w-full border border-green-200 rounded-lg px-4 py-3 text-sm text-deep-green focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-100 transition placeholder-gray-300" />
+                    </div>
+                    <div>
+                        <label
+                            class="text-xs font-semibold text-mid-green/70 tracking-widest uppercase block mb-1.5">Email</label>
+                        <input type="email" placeholder="email@contoh.com"
+                            class="w-full border border-green-200 rounded-lg px-4 py-3 text-sm text-deep-green focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-100 transition placeholder-gray-300" />
+                    </div>
+                    <div>
+                        <label
+                            class="text-xs font-semibold text-mid-green/70 tracking-widest uppercase block mb-1.5">Pesan</label>
+                        <textarea rows="4" placeholder="Tuliskan pesan Anda di sini..."
+                            class="w-full border border-green-200 rounded-lg px-4 py-3 text-sm text-deep-green focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-100 transition resize-none placeholder-gray-300"></textarea>
+                    </div>
+                    <button
+                        class="w-full bg-deep-green hover:bg-mid-green text-cream font-bold tracking-widest uppercase text-sm py-3.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-green-900/20 hover:shadow-lg">
+                        Kirim Pesan
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{{ end }}

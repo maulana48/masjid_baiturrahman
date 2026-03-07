@@ -1,0 +1,105 @@
+{{ define "home_about.html" }}
+<section id="about" class="py-24 bg-warm-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+
+            <!-- Text -->
+            <div>
+                <p class="text-yellow-600 text-xs tracking-widest uppercase mb-3 font-medium">Tentang Kami</p>
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-deep-green mb-2">Sejarah &amp; Visi
+                </h2>
+                <div class="gold-divider w-20 mb-6"></div>
+                <p class="text-mid-green/80 leading-relaxed mb-4">
+                    Masjid Baiturrahman berdiri megah sebagai simbol keimanan dan peradaban Islam di Aceh. Didirikan
+                    sejak abad ke-17, masjid ini telah menjadi pusat spiritualitas, pendidikan, dan kegiatan sosial
+                    masyarakat Muslim selama berabad-abad.
+                </p>
+                <p class="text-mid-green/70 leading-relaxed mb-8">
+                    Dengan arsitektur khas Mughal yang memadukan keindahan lokal Aceh, masjid ini menjadi warisan
+                    budaya yang tak ternilai — sebuah rumah ibadah yang menyambut seluruh umat dengan keterbukaan
+                    dan keimanan.
+                </p>
+                <div class="flex gap-10">
+                    <div>
+                        <p class="font-['Cinzel'] text-3xl font-bold text-yellow-600">300+</p>
+                        <p class="text-sm text-mid-green/60 tracking-wide mt-1">Tahun Berdiri</p>
+                    </div>
+                    <div>
+                        <p class="font-['Cinzel'] text-3xl font-bold text-yellow-600">5.000</p>
+                        <p class="text-sm text-mid-green/60 tracking-wide mt-1">Kapasitas Jamaah</p>
+                    </div>
+                    <div>
+                        <p class="font-['Cinzel'] text-3xl font-bold text-yellow-600">7</p>
+                        <p class="text-sm text-mid-green/60 tracking-wide mt-1">Kubah Utama</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorative block -->
+            <div class="relative">
+                <div
+                    class="geo-bg rounded-2xl w-full aspect-square max-w-md mx-auto flex items-center justify-center relative overflow-hidden shadow-2xl">
+                    <!-- Mosque illustration -->
+                    <svg viewBox="0 0 300 300" class="w-4/5 h-4/5" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground -->
+                        <rect x="0" y="220" width="300" height="80" fill="#0d2b1f" opacity="0.6" />
+                        <!-- Main building -->
+                        <rect x="70" y="170" width="160" height="55" fill="#1a4a30" />
+                        <rect x="80" y="180" width="20" height="40" fill="#0d2b1f" />
+                        <rect x="115" y="175" width="25" height="45" fill="#0d2b1f" />
+                        <rect x="160" y="175" width="25" height="45" fill="#0d2b1f" />
+                        <rect x="200" y="180" width="20" height="40" fill="#0d2b1f" />
+                        <!-- Doors -->
+                        <rect x="130" y="195" width="40" height="30" rx="20 20 0 0" fill="#c9a84c" opacity="0.8" />
+                        <!-- Main dome -->
+                        <ellipse cx="150" cy="160" rx="50" ry="30" fill="#2e7d52" />
+                        <ellipse cx="150" cy="155" rx="48" ry="28" fill="#1a4a30" />
+                        <path d="M102,160 Q102,110 150,105 Q198,110 198,160Z" fill="#2e7d52" />
+                        <!-- Side domes -->
+                        <path d="M70,170 Q70,148 90,145 Q110,148 110,170Z" fill="#1a4a30" />
+                        <path d="M190,170 Q190,148 210,145 Q230,148 230,170Z" fill="#1a4a30" />
+                        <!-- Minaret left -->
+                        <rect x="38" y="130" width="14" height="90" fill="#1a4a30" />
+                        <path d="M38,130 Q45,105 52,130Z" fill="#2e7d52" />
+                        <circle cx="45" cy="103" r="4" fill="#c9a84c" />
+                        <!-- Minaret right -->
+                        <rect x="248" y="130" width="14" height="90" fill="#1a4a30" />
+                        <path d="M248,130 Q255,105 262,130Z" fill="#2e7d52" />
+                        <circle cx="255" cy="103" r="4" fill="#c9a84c" />
+                        <!-- Crescent on dome -->
+                        <path d="M147,112 A6,6 0 1,0 147,124 A4,4 0 1,1 147,112Z" fill="#c9a84c" />
+                        <polygon
+                            points="154,112 155.2,115.6 159,115.6 156,117.8 157.2,121.4 154,119.2 150.8,121.4 152,117.8 149,115.6 152.8,115.6"
+                            fill="#c9a84c" />
+                        <!-- Arch details -->
+                        <path d="M80,170 Q90,155 100,170" fill="none" stroke="#c9a84c" stroke-width="1"
+                            opacity="0.6" />
+                        <path d="M115,170 Q127.5,152 140,170" fill="none" stroke="#c9a84c" stroke-width="1"
+                            opacity="0.6" />
+                        <path d="M160,170 Q172.5,152 185,170" fill="none" stroke="#c9a84c" stroke-width="1"
+                            opacity="0.6" />
+                        <path d="M200,170 Q210,155 220,170" fill="none" stroke="#c9a84c" stroke-width="1"
+                            opacity="0.6" />
+                        <!-- Pool reflection -->
+                        <ellipse cx="150" cy="235" rx="70" ry="8" fill="#c9a84c" opacity="0.07" />
+                    </svg>
+                    <!-- Corner ornaments -->
+                    <div
+                        class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-yellow-500/40 rounded-tl">
+                    </div>
+                    <div
+                        class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-yellow-500/40 rounded-tr">
+                    </div>
+                    <div
+                        class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-yellow-500/40 rounded-bl">
+                    </div>
+                    <div
+                        class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-yellow-500/40 rounded-br">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{{ end }}

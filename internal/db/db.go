@@ -30,6 +30,22 @@ func InitDB() {
 		log.Fatal(err)
 	}
 
+	createContactsTable := `
+	CREATE TABLE IF NOT EXISTS contacts (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		name TEXT,
+		phone TEXT,
+		email TEXT,
+		topic TEXT,
+		message TEXT,
+		created_at DATETIME
+	);
+	`
+	_, err = DB.Exec(createContactsTable)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// Check if data exists
 	var count int
 	err = DB.QueryRow("SELECT COUNT(*) FROM prayers").Scan(&count)
@@ -88,4 +104,14 @@ func GetPrayers() ([]models.Prayer, error) {
 	}
 
 	return prayers, nil
+}
+
+func SaveContact(msg models.ContactMessage) error {
+	stmt, err := DB.Prepare("INSERT INTO contacts(name, phone, email, topic, message, created_at) VALUES(?, ?, ?, ?, ?, ?)")
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+	_, err = stmt.Exec(msg.Name, msg.Phone, msg.Email, msg.Topic, msg.Message, msg.CreatedAt)
+	return err
 }
