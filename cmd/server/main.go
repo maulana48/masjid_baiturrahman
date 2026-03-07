@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"html/template"
 	"log"
 	"masjid_baiturrahman/internal/db"
@@ -53,7 +54,15 @@ func renderPage(w http.ResponseWriter, page string, data interface{}) {
 		"templates/partials/home_contact.html",
 	}
 
-	tmpl, err := template.ParseFiles(files...)
+	tmpl := template.New("layout.html").Funcs(template.FuncMap{
+		"json": func(v interface{}) template.JS {
+			a, _ := json.Marshal(v)
+			return template.JS(a)
+		},
+	})
+
+	var err error
+	tmpl, err = tmpl.ParseFiles(files...)
 	if err != nil {
 		http.Error(w, "Template error: "+err.Error(), http.StatusInternalServerError)
 		return
@@ -76,15 +85,23 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	programs, err := db.GetHomePrograms()
+	if err != nil {
+		http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	data := struct {
 		PageData
-		Prayers []models.Prayer
+		Prayers  []models.Prayer
+		Programs []models.Program
 	}{
 		PageData: PageData{
 			Title: "Masjid Baiturrahman - Home",
 			Path:  "/",
 		},
-		Prayers: prayers,
+		Prayers:  prayers,
+		Programs: programs,
 	}
 
 	renderPage(w, "index.html", data)
@@ -103,13 +120,21 @@ func handleAbout(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleProgram(w http.ResponseWriter, r *http.Request) {
+	programs, err := db.GetAllPrograms()
+	if err != nil {
+		http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	data := struct {
 		PageData
+		Programs []models.Program
 	}{
 		PageData: PageData{
 			Title: "Program - Masjid Baiturrahman",
 			Path:  "/program",
 		},
+		Programs: programs,
 	}
 	renderPage(w, "program.html", data)
 }

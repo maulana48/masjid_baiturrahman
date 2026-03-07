@@ -46,6 +46,26 @@ func InitDB() {
 		log.Fatal(err)
 	}
 
+	createProgramsTable := `
+	CREATE TABLE IF NOT EXISTS programs (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		title TEXT,
+		category TEXT,
+		arabic_title TEXT,
+		description TEXT,
+		ustadz TEXT,
+		schedule TEXT,
+		level TEXT,
+		quota TEXT,
+		is_featured BOOLEAN DEFAULT 0,
+		show_on_home BOOLEAN DEFAULT 0
+	);
+	`
+	_, err = DB.Exec(createProgramsTable)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// Check if data exists
 	var count int
 	err = DB.QueryRow("SELECT COUNT(*) FROM prayers").Scan(&count)
@@ -64,6 +84,29 @@ func InitDB() {
 		('Isya', '19:48');
 		`
 		_, err = DB.Exec(insert)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	// Seed programs if empty
+	var progCount int
+	err = DB.QueryRow("SELECT COUNT(*) FROM programs").Scan(&progCount)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if progCount == 0 {
+		insertProgs := `
+		INSERT INTO programs (title, category, arabic_title, description, ustadz, schedule, level, quota, is_featured, show_on_home) VALUES
+		('Tahfizh Intensif', 'unggulan', 'تَحْفِيْظ', 'Program hafalan Al-Quran intensif dengan target 30 juz.', 'Ust. Qari Ridho', 'Setiap Hari', 'Semua Usia', 'Terbatas', 1, 0),
+		('Kajian Tafsir', 'kajian', 'تَفْسِيْر', 'Membedah makna ayat-ayat Al-Quran secara mendalam.', 'Ust. Dr. Fauzan', 'Senin & Kamis Malam', 'Umum', 'Terbuka', 0, 1),
+		('TPA Anak', 'pendidikan', 'تَعْلِيْم', 'Pendidikan Al-Quran dasar untuk anak-anak.', 'Tim TPA', 'Sabtu & Minggu Pagi', 'Anak-anak', '50 Santri', 0, 1),
+		('Remaja Masjid', 'remaja', 'شَبَاب', 'Wadah kreativitas dan dakwah remaja.', 'Pembina Remaja', 'Jumat Sore', 'Remaja', 'Terbuka', 0, 0),
+		('Baksos & Zakat', 'sosial', 'زَكَاة', 'Penyaluran bantuan sosial dan pengelolaan zakat.', 'Panitia ZIS', 'Kondisional', 'Umum', '-', 0, 1),
+		('Fiqh Muamalah', 'kajian', 'فِقْه', 'Kajian hukum ekonomi dan transaksi Islam.', 'Ust. Syarifuddin', 'Selasa Pagi', 'Umum', 'Terbuka', 0, 0);
+		`
+		_, err = DB.Exec(insertProgs)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -104,6 +147,42 @@ func GetPrayers() ([]models.Prayer, error) {
 	}
 
 	return prayers, nil
+}
+
+func GetAllPrograms() ([]models.Program, error) {
+	rows, err := DB.Query("SELECT id, title, category, arabic_title, description, ustadz, schedule, level, quota, is_featured, show_on_home FROM programs")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var programs []models.Program
+	for rows.Next() {
+		var p models.Program
+		if err := rows.Scan(&p.ID, &p.Title, &p.Category, &p.ArabicTitle, &p.Description, &p.Ustadz, &p.Schedule, &p.Level, &p.Quota, &p.IsFeatured, &p.ShowOnHome); err != nil {
+			return nil, err
+		}
+		programs = append(programs, p)
+	}
+	return programs, nil
+}
+
+func GetHomePrograms() ([]models.Program, error) {
+	rows, err := DB.Query("SELECT id, title, category, arabic_title, description, ustadz, schedule, level, quota, is_featured, show_on_home FROM programs WHERE show_on_home = 1 LIMIT 3")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var programs []models.Program
+	for rows.Next() {
+		var p models.Program
+		if err := rows.Scan(&p.ID, &p.Title, &p.Category, &p.ArabicTitle, &p.Description, &p.Ustadz, &p.Schedule, &p.Level, &p.Quota, &p.IsFeatured, &p.ShowOnHome); err != nil {
+			return nil, err
+		}
+		programs = append(programs, p)
+	}
+	return programs, nil
 }
 
 func SaveContact(msg models.ContactMessage) error {
