@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .Title }}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+
+<body x-data="{ menuOpen: false, activeSection: 'home' }" @scroll.window="activeSection = getActiveSection()">
+
+    {{ template "navbar.html" . }}
+
+    {{ template "content" . }}
+
+    {{ template "footer.html" . }}
+
+</body>
+
+</html>
