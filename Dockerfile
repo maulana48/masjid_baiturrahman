@@ -28,6 +28,7 @@ RUN apk add --no-cache ca-certificates tzdata
 
 # Copy the binary from builder
 COPY --from=builder /app/main .
+COPY --from=builder /app/masjid.db .
 
 # Copy static files and templates
 COPY --from=builder /app/static ./static
@@ -37,7 +38,7 @@ COPY --from=builder /app/templates ./templates
 EXPOSE 8080
 
 # Environment variable for DB path
-ENV DB_PATH=/data/masjid.db
+ENV DB_PATH=masjid.db
 
 # Command to run the executable
 CMD ["./main"]

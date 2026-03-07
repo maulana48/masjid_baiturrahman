@@ -78,11 +78,7 @@
         <a href="/gallery" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /gallery"}}text-yellow-400
             bg-white/10{{else}}text-cream/90 hover:text-yellow-400 hover:bg-white/5{{end}} rounded font-medium
             tracking-wider uppercase text-sm transition">Gallery</a>
-        <a href="/dashboard" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path "
-            /dashboard"}}text-yellow-400 bg-white/10{{else}}text-cream/90 hover:text-yellow-400 hover:bg-white/5{{end}}
-            rounded font-medium tracking-wider uppercase text-sm transition">Dashboard</a>
-        <a href="/contact" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /contact"}}text-yellow-400
-            bg-yellow-500/20{{else}}text-yellow-400 hover:bg-yellow-500/20{{end}} border border-yellow-500/40 rounded
-            font-medium tracking-wider uppercase text-sm mt-2 transition">Contact</a>
+        <a href="/dashboard" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path "/dashboard"}} text-yellow-400 bg-white/10{{else}}text-cream/90 hover:text-yellow-400 hover:bg-white/5{{end}} rounded font-medium tracking-wider uppercase text-sm transition">Dashboard</a>
+        <a href="/contact" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path "/contact" }}text-yellow-400 bg-yellow-500/20{{else}}text-yellow-400 hover:bg-yellow-500/20{{end}} border border-yellow-500/40 rounded font-medium tracking-wider uppercase text-sm mt-2 transition">Contact</a>
     </div>
 </nav>
