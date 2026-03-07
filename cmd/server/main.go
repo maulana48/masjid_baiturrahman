@@ -7,6 +7,7 @@ import (
 	"masjid_baiturrahman/internal/db"
 	"masjid_baiturrahman/internal/models"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -23,6 +24,7 @@ func main() {
 	http.HandleFunc("/program", handleProgram)
 	http.HandleFunc("/gallery", handleGallery)
 	http.HandleFunc("/contact", handleContact)
+	http.HandleFunc("/dashboard", handleDashboard)
 
 	// HTMX endpoints
 	http.HandleFunc("/prayers", handlePrayers) // Returns partial
@@ -108,13 +110,9 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleAbout(w http.ResponseWriter, r *http.Request) {
-	data := struct {
-		PageData
-	}{
-		PageData: PageData{
-			Title: "About - Masjid Baiturrahman",
-			Path:  "/about",
-		},
+	data := PageData{
+		Title: "Masjid Baiturrahman - About",
+		Path:  "/about",
 	}
 	renderPage(w, "about.html", data)
 }
@@ -125,13 +123,12 @@ func handleProgram(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
-
 	data := struct {
 		PageData
 		Programs []models.Program
 	}{
 		PageData: PageData{
-			Title: "Program - Masjid Baiturrahman",
+			Title: "Masjid Baiturrahman - Program",
 			Path:  "/program",
 		},
 		Programs: programs,
@@ -140,70 +137,61 @@ func handleProgram(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleGallery(w http.ResponseWriter, r *http.Request) {
-	data := struct {
-		PageData
-	}{
-		PageData: PageData{
-			Title: "Gallery - Masjid Baiturrahman",
-			Path:  "/gallery",
-		},
+	data := PageData{
+		Title: "Masjid Baiturrahman - Gallery",
+		Path:  "/gallery",
 	}
 	renderPage(w, "gallery.html", data)
 }
 
 func handleContact(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodPost {
-		// Parse form
-		if err := r.ParseForm(); err != nil {
-			http.Error(w, "Invalid form data", http.StatusBadRequest)
+	if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			http.Error(w, "Parse error", http.StatusBadRequest)
 			return
 		}
-
-		contact := models.ContactMessage{
-			Name:    r.FormValue("name"),
-			Phone:   r.FormValue("phone"),
-			Email:   r.FormValue("email"),
-			Topic:   r.FormValue("topic"),
-			Message: r.FormValue("message"),
+		msg := models.ContactMessage{
+			Name:      r.FormValue("name"),
+			Phone:     r.FormValue("phone"),
+			Email:     r.FormValue("email"),
+			Topic:     r.FormValue("topic"),
+			Message:   r.FormValue("message"),
+			CreatedAt: time.Now(),
 		}
-
-		if err := db.SaveContact(contact); err != nil {
+		if err := db.SaveContact(msg); err != nil {
 			http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
-
-		// Return success message partial
-		tmpl := `
-		<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-			<strong class="font-bold">Terima kasih!</strong>
-			<span class="block sm:inline">Pesan Anda telah kami terima. Kami akan segera menghubungi Anda.</span>
-		</div>
-		`
-		t, _ := template.New("success").Parse(tmpl)
-		t.Execute(w, nil)
+		// Return success message for HTMX
+		w.Write([]byte("<div class='bg-green-100 text-green-800 p-4 rounded border border-green-200'>Terima kasih! Pesan Anda telah terkirim.</div>"))
 		return
 	}
 
-	// GET request
-	topic := r.URL.Query().Get("topic")
-	data := struct {
-		PageData
-		Topic string
-	}{
-		PageData: PageData{
-			Title: "Contact - Masjid Baiturrahman",
-			Path:  "/contact",
-		},
-		Topic: topic,
+	data := PageData{
+		Title: "Masjid Baiturrahman - Contact",
+		Path:  "/contact",
 	}
 	renderPage(w, "contact.html", data)
 }
 
+func handleDashboard(w http.ResponseWriter, r *http.Request) {
+	data := PageData{
+		Title: "Masjid Baiturrahman - Dashboard",
+		Path:  "/dashboard",
+	}
+	renderPage(w, "dashboard.html", data)
+}
+
 func handlePrayers(w http.ResponseWriter, r *http.Request) {
-	// This endpoint returns ONLY the partial for HTMX
 	prayers, err := db.GetPrayers()
 	if err != nil {
 		http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	tmpl, err := template.ParseFiles("templates/partials/prayer_times.html")
+	if err != nil {
+		http.Error(w, "Template error: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
@@ -213,13 +201,5 @@ func handlePrayers(w http.ResponseWriter, r *http.Request) {
 		Prayers: prayers,
 	}
 
-	tmpl, err := template.ParseFiles("templates/partials/prayer_times.html")
-	if err != nil {
-		http.Error(w, "Template error: "+err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	if err := tmpl.Execute(w, data); err != nil {
-		http.Error(w, "Render error: "+err.Error(), http.StatusInternalServerError)
-	}
+	tmpl.Execute(w, data)
 }

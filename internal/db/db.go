@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"masjid_baiturrahman/internal/models"
+	"os"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -13,7 +14,11 @@ var DB *sql.DB
 
 func InitDB() {
 	var err error
-	DB, err = sql.Open("sqlite3", "./masjid.db")
+	dbPath := os.Getenv("DB_PATH")
+	if dbPath == "" {
+		dbPath = "./masjid.db"
+	}
+	DB, err = sql.Open("sqlite3", dbPath)
 	if err != nil {
 		log.Fatal(err)
 	}
