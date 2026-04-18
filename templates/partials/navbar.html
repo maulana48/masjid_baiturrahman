@@ -22,24 +22,16 @@
             </div>
 
             <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center gap-7">
-                <a href="/" class="nav-link {{if eq .Path " /"}}text-yellow-400{{else}}text-cream/90
-                    hover:text-yellow-400{{end}} text-sm font-medium tracking-wider uppercase">Home</a>
-                <a href="/about" class="nav-link {{if eq .Path " /about"}}text-yellow-400{{else}}text-cream/90
-                    hover:text-yellow-400{{end}} text-sm font-medium tracking-wider uppercase">About</a>
-                <a href="/#prayers"
-                    class="nav-link text-cream/90 hover:text-yellow-400 text-sm font-medium tracking-wider uppercase">Prayer
-                    Times</a>
-                <a href="/program" class="nav-link {{if eq .Path " /program"}}text-yellow-400{{else}}text-cream/90
-                    hover:text-yellow-400{{end}} text-sm font-medium tracking-wider uppercase">Pengajian</a>
-                <a href="/gallery" class="nav-link {{if eq .Path " /gallery"}}text-yellow-400{{else}}text-cream/90
-                    hover:text-yellow-400{{end}} text-sm font-medium tracking-wider uppercase">Gallery</a>
-                <a href="/dashboard" class="nav-link {{if eq .Path " /dashboard"}}text-yellow-400{{else}}text-cream/90
-                    hover:text-yellow-400{{end}} text-sm font-medium tracking-wider uppercase">Dashboard</a>
-                <a href="/contact" class="{{if eq .Path " /contact"}}bg-yellow-500
-                    text-deep-green{{else}}bg-yellow-600/20 text-yellow-400 hover:bg-yellow-500
-                    hover:text-deep-green{{end}} border border-yellow-500/50 text-sm font-semibold tracking-wider
-                    uppercase px-5 py-2 rounded transition-all duration-300">Contact</a>
+            <div
+                class="hidden md:flex items-center gap-7 text-sm font-medium tracking-wider uppercase text-cream/90 text-yellow-400">
+                <a href="/" class="nav-link {{if eq .Path "/"}}text-yellow-600{{end}}">Home</a>
+                <a href="/about" class="nav-link {{if eq .Path "/about"}}text-yellow-600{{end}}">About</a>
+                <a href="/#prayers" class="nav-link">Prayer Times</a>
+                <a href="/program" class="nav-link {{if eq .Path "/program"}}text-yellow-600{{end}}">Pengajian</a>
+                <a href="/gallery" class="nav-link {{if eq .Path "/gallery"}}text-yellow-600{{end}}">Gallery</a>
+                <a href="/dashboard" class="nav-link {{if eq .Path "/dashboard"}}text-yellow-600{{end}}">Dashboard</a>
+                <a href="/contact" class="{{if eq .Path "/contact"}}text-yellow-600{{end}} border border-yellow-500/50 hover:bg-yellow-300 hover:text-deep-green font-semibold px-5 py-2 rounded
+                    transition-all duration-300">Contact</a>
             </div>
 
             <!-- Hamburger -->
@@ -63,22 +55,25 @@
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 -translate-y-2"
         class="md:hidden geo-bg border-t border-yellow-500/20 px-4 pb-5 pt-3 space-y-1">
-        <a href="/" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /"}}text-yellow-400
-            bg-white/10{{else}}text-cream/90 hover:text-yellow-400 hover:bg-white/5{{end}} rounded font-medium
-            tracking-wider uppercase text-sm transition">Home</a>
+        <a href="/" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /"}}text-yellow-400 bg-white/10
+            hover:bg-white/5{{end}} rounded font-medium tracking-wider uppercase text-sm transition">Home</a>
         <a href="/about" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /about"}}text-yellow-400
-            bg-white/10{{else}}text-cream/90 hover:text-yellow-400 hover:bg-white/5{{end}} rounded font-medium
-            tracking-wider uppercase text-sm transition">About</a>
+            bg-white/10 hover:bg-white/5{{end}} rounded font-medium tracking-wider uppercase text-sm
+            transition">About</a>
         <a href="/#prayers" @click="menuOpen=false"
             class="block py-2.5 px-4 text-cream/90 hover:text-yellow-400 hover:bg-white/5 rounded font-medium tracking-wider uppercase text-sm transition">Prayer
             Times</a>
         <a href="/program" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /program"}}text-yellow-400
-            bg-white/10{{else}}text-cream/90 hover:text-yellow-400 hover:bg-white/5{{end}} rounded font-medium
-            tracking-wider uppercase text-sm transition">Pengajian</a>
+            bg-white/10 hover:bg-white/5{{end}} rounded font-medium tracking-wider uppercase text-sm
+            transition">Pengajian</a>
         <a href="/gallery" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /gallery"}}text-yellow-400
-            bg-white/10{{else}}text-cream/90 hover:text-yellow-400 hover:bg-white/5{{end}} rounded font-medium
-            tracking-wider uppercase text-sm transition">Gallery</a>
-        <a href="/dashboard" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path "/dashboard"}} text-yellow-400 bg-white/10{{else}}text-cream/90 hover:text-yellow-400 hover:bg-white/5{{end}} rounded font-medium tracking-wider uppercase text-sm transition">Dashboard</a>
-        <a href="/contact" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path "/contact" }}text-yellow-400 bg-yellow-500/20{{else}}text-yellow-400 hover:bg-yellow-500/20{{end}} border border-yellow-500/40 rounded font-medium tracking-wider uppercase text-sm mt-2 transition">Contact</a>
+            bg-white/10 hover:bg-white/5{{end}} rounded font-medium tracking-wider uppercase text-sm
+            transition">Gallery</a>
+        <a href="/dashboard" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /dashboard"}}
+            text-yellow-400 bg-white/10 hover:bg-white/5{{end}} rounded font-medium tracking-wider uppercase text-sm
+            transition">Dashboard</a>
+        <a href="/contact" @click="menuOpen=false" class="block py-2.5 px-4 {{if eq .Path " /contact" }}text-yellow-400
+            bg-yellow-500/20{{else}}text-yellow-400 hover:bg-yellow-500/20{{end}} border border-yellow-500/40 rounded
+            font-medium tracking-wider uppercase text-sm mt-2 transition">Contact</a>
     </div>
 </nav>
