@@ -6,7 +6,7 @@
         <p
             class="{{ if .IsNext }}text-yellow-400{{ else }}text-yellow-400/90{{ end }} text-xs tracking-widest uppercase mb-2">
             {{ .Name }}</p>
-        <p class="{{ if .IsNext }}text-yellow-300{{ else }}text-cream{{ end }} font-['Cinzel'] text-2xl font-semibold">
+        <p class="{{ if .IsNext }}text-yellow-300{{ else }}text-yellow-400{{ end }} font-['Cinzel'] text-2xl font-semibold">
             {{ .Time }}</p>
     </div>
     {{ end }}
