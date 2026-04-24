@@ -1,13 +1,49 @@
-<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4" id="prayer-grid" hx-get="/prayers"
-    hx-trigger="every 60s" hx-swap="outerHTML">
-    {{ range .Prayers }}
-    <div
-        class="prayer-card {{ if .IsNext }}bg-yellow-600/20 border-yellow-500{{ else }}bg-white/5{{ end }} rounded-lg p-5 text-center card-hover">
-        <p
-            class="{{ if .IsNext }}text-yellow-400{{ else }}text-yellow-400/90{{ end }} text-xs tracking-widest uppercase mb-2">
-            {{ .Name }}</p>
-        <p class="{{ if .IsNext }}text-yellow-300{{ else }}text-yellow-400{{ end }} font-['Cinzel'] text-2xl font-semibold">
-            {{ .Time }}</p>
-    </div>
-    {{ end }}
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4" id="prayer-grid" x-data="prayerTimes()"
+    x-init="loadPrayerTimes()">
+    <template x-for="(time, prayer) in timings" :key="prayer">
+        <div class="prayer-card bg-white/5 rounded-lg p-5 text-center card-hover">
+            <p class="text-yellow-400/90 text-xs tracking-widest uppercase mb-2">
+                <span x-text="prayer"></span>
+            </p>
+            <p class="text-yellow-400 font-['Cinzel'] text-2xl font-semibold">
+                <span x-text="time"></span>
+            </p>
+        </div>
+    </template>
 </div>
+<script>
+    function prayerTimes() {
+        return {
+            loading: true,
+            timings: {},
+
+            async loadPrayerTimes() {
+                try {
+                    const res = await fetch(
+                        'https://api.aladhan.com/v1/timings/18-04-2026?latitude=-6.89307014867955&longitude=107.58790194232877&method=2&school=1&language=id'
+                    );
+
+                    const json = await res.json();
+                    const mappedTimings = {
+                        "Subuh": "Fajr",
+                        "Syuruq": "Sunrise",
+                        "Dzuhur": "Dhuhr",
+                        "Ashar": "Asr",
+                        "Maghrib": "Maghrib",
+                        "Isya": "Isha"
+                    }
+
+                    const usedTimings = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+                    this.timings = Object.fromEntries(
+                        Object.entries(json.data.timings).filter(([key]) => usedTimings.includes(key))
+                    );
+                } catch (e) {
+                    console.error(e);
+                } finally {
+                    this.loading = false;
+                }
+            }
+        }
+    }
+</script>

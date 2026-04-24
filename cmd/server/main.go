@@ -81,17 +81,17 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	prayers, err := db.GetPrayers()
-	if err != nil {
-		http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
-		return
-	}
+	// prayers, err := db.GetPrayers()
+	// if err != nil {
+	// 	http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
 
-	programs, err := db.GetHomePrograms()
-	if err != nil {
-		http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
-		return
-	}
+	// programs, err := db.GetHomePrograms()
+	// if err != nil {
+	// 	http.Error(w, "Database error: "+err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
 
 	data := struct {
 		PageData
@@ -102,8 +102,8 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 			Title: "Masjid Baiturrahman - Home",
 			Path:  "/",
 		},
-		Prayers:  prayers,
-		Programs: programs,
+		// Prayers:  prayers,
+		// Programs: programs,
 	}
 
 	renderPage(w, "index.html", data)
