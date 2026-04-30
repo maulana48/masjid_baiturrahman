@@ -1,149 +1,316 @@
 {{ define "content" }}
-<section
-    class="page-hero-bg pt-20 min-h-[52vh] flex flex-col items-center justify-center text-center relative overflow-hidden">
-    <!-- Decorative rings -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div class="w-[600px] h-[600px] rounded-full border border-yellow-500/5 absolute"></div>
-        <div class="w-[400px] h-[400px] rounded-full border border-yellow-500/8 absolute"></div>
-    </div>
-    <div class="relative z-10 px-6 py-16">
-        <p class="arabic-title text-yellow-600/60 text-3xl mb-3 fade-up">عَنْ مَسْجِدِنَا</p>
-        <h1 class="section-title text-5xl md:text-6xl font-bold text-cream mb-4 fade-up delay-1">Tentang <span
-                class="text-yellow-400">Kami</span></h1>
-        <div class="gold-divider w-28 mx-auto mb-5 fade-up delay-2"></div>
-        <p class="text-cream/80 text-sm tracking-widest uppercase fade-up delay-2">Sejarah · Visi · Struktur · Nilai
-        </p>
-    </div>
-    <!-- Breadcrumb -->
-    <div
-        class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 text-xs text-cream/60 tracking-widest uppercase">
-        <a href="/" class="hover:text-yellow-400 transition">Home</a>
-        <span>›</span>
-        <span class="text-yellow-400/70">About</span>
-    </div>
-</section>
 
-<!-- ── VISI MISI ── -->
-<section class="geo-bg py-20">
-    <div class="max-w-5xl mx-auto px-6">
-        <p class="text-center text-yellow-400/70 text-xs tracking-widest uppercase mb-3">Arah &amp; Tujuan</p>
-        <h2 class="section-title text-center text-yellow-200 text-3xl md:text-4xl font-bold mb-2">Visi &amp; Misi</h2>
-        <div class="gold-divider w-20 mx-auto mb-12"></div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Visi -->
-            <div class="bg-white/5 border border-yellow-500/20 rounded-2xl p-8 card-hover">
-                <div class="flex items-center gap-3 mb-5">
-                    <div class="value-icon w-12 h-12 rounded-xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                    </div>
-                    <h3 class="font-['Cinzel'] text-yellow-400 font-bold text-xl">Visi</h3>
-                </div>
-                <p class="text-yellow-400/80 leading-relaxed italic text-lg mb-4">"Menjadi pusat ibadah, pendidikan, dan
-                    peradaban Islam yang rahmatan lil alamin di Aceh dan Nusantara."</p>
-            </div>
-            <!-- Misi -->
-            <div class="bg-white/5 border border-yellow-500/20 rounded-2xl p-8 card-hover">
-                <div class="flex items-center gap-3 mb-5">
-                    <div class="value-icon w-12 h-12 rounded-xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                        </svg>
-                    </div>
-                    <h3 class="font-['Cinzel'] text-yellow-400 font-bold text-xl">Misi</h3>
-                </div>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-2 text-yellow-400/70 text-sm leading-relaxed"><span
-                            class="text-yellow-500 mt-0.5 flex-shrink-0">◆</span>Menyelenggarakan ibadah dengan
-                        tertib dan khusyuk sesuai syariat Islam</li>
-                    <li class="flex items-start gap-2 text-yellow-400/70 text-sm leading-relaxed"><span
-                            class="text-yellow-500 mt-0.5 flex-shrink-0">◆</span>Mengembangkan program pendidikan
-                        Islam bagi seluruh kalangan usia</li>
-                    <li class="flex items-start gap-2 text-yellow-400/70 text-sm leading-relaxed"><span
-                            class="text-yellow-500 mt-0.5 flex-shrink-0">◆</span>Memperkuat ukhuwah islamiyah dan
-                        kepedulian sosial kemasyarakatan</li>
-                    <li class="flex items-start gap-2 text-yellow-400/70 text-sm leading-relaxed"><span
-                            class="text-yellow-500 mt-0.5 flex-shrink-0">◆</span>Melestarikan warisan budaya dan
-                        arsitektur masjid sebagai aset peradaban</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Amiri:wght@400;700&display=swap');
 
-<!-- ── NILAI-NILAI ── -->
-<section class="py-24 warm-tile-bg">
-    <div class="max-w-6xl mx-auto px-6">
-        <p class="text-center text-yellow-600 text-xs tracking-widest uppercase mb-3">Landasan Kami</p>
-        <h2 class="section-title text-center text-deep-green text-3xl md:text-4xl font-bold mb-2">Nilai-Nilai Kami
-        </h2>
-        <div class="gold-divider w-20 mx-auto mb-14"></div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-white border border-green-100 rounded-2xl p-6 card-hover text-center shadow-sm">
-                <div class="w-14 h-14 value-icon rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                </div>
-                <h4 class="font-['Cinzel'] text-deep-green font-semibold mb-2">Ikhlas</h4>
-                <p class="text-mid-green/60 text-sm leading-relaxed">Semua kegiatan diniatkan semata-mata karena
-                    Allah SWT.</p>
-            </div>
-            <div class="bg-white border border-green-100 rounded-2xl p-6 card-hover text-center shadow-sm">
-                <div class="w-14 h-14 value-icon rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </div>
-                <h4 class="font-['Cinzel'] text-deep-green font-semibold mb-2">Ukhuwah</h4>
-                <p class="text-mid-green/60 text-sm leading-relaxed">Mempererat persaudaraan sesama Muslim tanpa
-                    membeda-bedakan.</p>
-            </div>
-            <div class="bg-white border border-green-100 rounded-2xl p-6 card-hover text-center shadow-sm">
-                <div class="w-14 h-14 value-icon rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                </div>
-                <h4 class="font-['Cinzel'] text-deep-green font-semibold mb-2">Amanah</h4>
-                <p class="text-mid-green/60 text-sm leading-relaxed">Mengelola setiap titipan umat dengan transparan
-                    dan bertanggung jawab.</p>
-            </div>
-            <div class="bg-white border border-green-100 rounded-2xl p-6 card-hover text-center shadow-sm">
-                <div class="w-14 h-14 value-icon rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                </div>
-                <h4 class="font-['Cinzel'] text-deep-green font-semibold mb-2">Ilmu</h4>
-                <p class="text-mid-green/60 text-sm leading-relaxed">Mendorong semangat belajar dan pengembangan
-                    diri setiap Muslim.</p>
-            </div>
-        </div>
-    </div>
-</section>
+    .struk-page {
+        --gold: #c9a84c;
+        --gold-lt: #e8c96e;
+        --deep: #0d2b1f;
+        --mid: #1a4a30;
+        --cream: #f5f0e8;
+        --warm-bg: #f8f5ef;
+    }
 
-<!-- ── AYAT BANNER ── -->
-<section class="geo-bg py-16">
-    <div class="max-w-2xl mx-auto px-6 text-center">
-        <p class="arabic-title text-yellow-400 text-3xl leading-loose mb-5">إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ
-            لَلَّذِي بِبَكَّةَ مُبَارَكًا</p>
-        <div class="gold-divider w-16 mx-auto mb-5"></div>
-        <p class="text-yellow-300/60 text-sm italic leading-relaxed">"Sesungguhnya rumah yang pertama kali dibangun
-            untuk
-            manusia ialah Baitullah di Bakkah yang diberkahi."</p>
-        <p class="text-yellow-500/50 text-xs mt-3 tracking-wide">— QS. Ali Imran: 96</p>
-    </div>
-</section>
+    /* ── Tile backgrounds ── */
+    .tile-bg {
+        background-color: var(--deep);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.4' opacity='0.12'%3E%3Cpolygon points='40,4 76,22 76,58 40,76 4,58 4,22'/%3E%3Cpolygon points='40,14 66,28 66,52 40,66 14,52 14,28'/%3E%3Cline x1='40' y1='4' x2='40' y2='76'/%3E%3Cline x1='4' y1='22' x2='76' y2='58'/%3E%3Cline x1='4' y1='58' x2='76' y2='22'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .warm-tile-bg {
+        background-color: var(--warm-bg);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.3' opacity='0.07'%3E%3Cpolygon points='30,3 57,16 57,44 30,57 3,44 3,16'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* ── Utility ── */
+    .gold-line {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .connector-v {
+        width: 2px;
+        background: linear-gradient(to bottom, var(--gold), var(--gold-lt));
+        margin: 0 auto;
+    }
+
+    .connector-h {
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold-lt), var(--gold), var(--gold-lt));
+    }
+
+    /* ── Org node styles ── */
+    .rank-1 {
+        box-shadow: 0 0 0 3px #c9a84c55, 0 0 32px #c9a84c22;
+    }
+
+    .rank-2 {
+        box-shadow: 0 0 0 2px #c9a84c33;
+    }
+
+    .avatar-ring {
+        background: conic-gradient(var(--gold) 0%, var(--gold-lt) 25%, var(--gold) 50%, var(--gold-lt) 75%, var(--gold) 100%);
+        padding: 3px;
+        border-radius: 50%;
+    }
+
+    .avatar-ring-sq {
+        background: conic-gradient(var(--gold) 0%, var(--gold-lt) 25%, var(--gold) 50%, var(--gold-lt) 75%, var(--gold) 100%);
+        padding: 2px;
+        border-radius: 12px;
+    }
+
+    .card-lift {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10);
+    }
+
+    /* ── Tab styles ── */
+    .tab-btn {
+        font-family: 'Cinzel', serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.5rem 1.1rem;
+        border-radius: 999px;
+        border: 1px solid;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .tab-active {
+        background: var(--mid);
+        color: var(--cream);
+        border-color: var(--mid);
+    }
+
+    .tab-inactive {
+        background: white;
+        color: #3a5a47;
+        border-color: #c3daca;
+    }
+
+    .tab-inactive:hover {
+        border-color: var(--gold);
+        color: var(--mid);
+    }
+
+    /* ── Bidang color accents ── */
+    .bid-ibadah {
+        border-left: 3px solid #c9a84c;
+    }
+
+    .bid-pendidikan {
+        border-left: 3px solid #4a90c9;
+    }
+
+    .bid-humas {
+        border-left: 3px solid #4ac990;
+    }
+
+    .bid-sarpras {
+        border-left: 3px solid #9a4ac9;
+    }
+
+    /* ── Seksi cards ── */
+    .seksi-card {
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+    }
+
+    .seksi-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    .seksi-head {
+        padding: 0.65rem 0.9rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .seksi-title {
+        font-family: 'Lora', serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #0d2b1f;
+        line-height: 1.35;
+    }
+
+    .seksi-ketua-name {
+        font-size: 0.65rem;
+        color: #6b7280;
+        margin-top: 2px;
+    }
+
+    .seksi-chevron {
+        font-size: 0.6rem;
+        color: #9ca3af;
+        flex-shrink: 0;
+        margin-top: 3px;
+        transition: transform 0.2s;
+    }
+
+    .seksi-body {
+        border-top: 1px solid rgba(201, 168, 76, 0.12);
+        padding: 0.6rem 0.9rem;
+        background: rgba(201, 168, 76, 0.03);
+    }
+
+    .seksi-member {
+        font-size: 0.65rem;
+        color: #4b5563;
+        padding: 0.25rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .seksi-member:last-child {
+        border-bottom: none;
+    }
+
+    .seksi-member.is-ketua {
+        font-weight: 600;
+        color: #0d2b1f;
+    }
+
+    /* ── Dewan (advisory) cards ── */
+    .dewan-card {
+        border: 1px dashed rgba(201, 168, 76, 0.35);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        background: rgba(201, 168, 76, 0.04);
+    }
+
+    .dewan-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.3rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dewan-item:last-child {
+        border-bottom: none;
+    }
+
+    .dewan-num {
+        font-family: 'Cinzel', serif;
+        font-size: 0.6rem;
+        color: var(--gold);
+        min-width: 1.2rem;
+    }
+
+    .dewan-name {
+        font-size: 0.72rem;
+        color: #1a4a30;
+        font-family: 'Lora', serif;
+    }
+
+    /* ── Fade-up animation ── */
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-up {
+        animation: fadeUp 0.5s ease both;
+    }
+
+    .delay-1 {
+        animation-delay: 0.05s;
+    }
+
+    .delay-2 {
+        animation-delay: 0.10s;
+    }
+
+    .delay-3 {
+        animation-delay: 0.15s;
+    }
+
+    .delay-4 {
+        animation-delay: 0.20s;
+    }
+
+    .delay-5 {
+        animation-delay: 0.25s;
+    }
+
+    .delay-6 {
+        animation-delay: 0.30s;
+    }
+
+    /* ── Category badge ── */
+    .cat-badge {
+        display: inline-block;
+        font-size: 0.55rem;
+        font-family: 'Cinzel', serif;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 999px;
+        margin-left: 6px;
+        vertical-align: middle;
+    }
+
+    .badge-ibadah {
+        background: rgba(201, 168, 76, 0.12);
+        color: #8a6a1a;
+    }
+
+    .badge-pendidikan {
+        background: rgba(74, 144, 201, 0.12);
+        color: #1a5a8a;
+    }
+
+    .badge-humas {
+        background: rgba(74, 201, 144, 0.12);
+        color: #0d6640;
+    }
+
+    .badge-sarpras {
+        background: rgba(154, 74, 201, 0.12);
+        color: #5a1a8a;
+    }
+
+    /* ── Imam tetap pills ── */
+    .imam-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: white;
+        border: 1px solid rgba(201, 168, 76, 0.25);
+        border-radius: 999px;
+        padding: 0.3rem 0.75rem;
+        font-family: 'Lora', serif;
+        font-size: 0.72rem;
+        color: #0d2b1f;
+    }
+
+    .imam-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        flex-shrink: 0;
+    }
+</style>
 
 <div class="struk-page" x-data="{
   activeTab: 'bagan',
@@ -209,18 +376,21 @@
     this.openSeksi = this.openSeksi === key ? null : key;
   }
 }">
+
     <!-- ═══════════════════════════
-        SECTION HEADER (always visible)
-    ═══════════════════════════ -->
-    <div class="warm-tile-bg pt-12 px-4">
+       SECTION HEADER (always visible)
+  ═══════════════════════════ -->
+    <div class="tile-bg py-12 px-4">
         <div class="max-w-4xl mx-auto text-center">
-            <p class="arabic-title text-yellow-400 text-2xl leading-loose mb-1">
+            <p style="font-family:'Amiri',serif; color:rgba(201,168,76,0.6); font-size:1.3rem; margin-bottom:0.25rem;">
                 هَيْكَلُ التَّنْظِيم
             </p>
-            <h1 class="font-['Cinzel'] text-xl text-deep-green font-bold tracking-wider mb-1">
+            <h1
+                style="font-family:'Cinzel',serif; font-size:1.5rem; font-weight:700; color:#f5f0e8; letter-spacing:0.06em;">
                 Struktur Organisasi DKM
             </h1>
-            <p class="font-['Cinzel'] text-base text-deep-green/80 italic mt-1 tracking-widest">
+            <p
+                style="font-size:0.75rem; color:rgba(245,240,232,0.45); margin-top:0.4rem; letter-spacing:0.1em; font-family:'Cinzel',serif;">
                 Masa Khidmat 2024 – 2027
             </p>
             <div class="gold-line w-20 mx-auto mt-4" style="width:5rem;"></div>
@@ -244,22 +414,13 @@
     </div>
 
     <!-- ═══════════════════════════
-           TAB 1 — BAGAN PENGURUS
-      ═══════════════════════════ -->
+       TAB 1 — BAGAN PENGURUS
+  ═══════════════════════════ -->
     <section x-show="activeTab==='bagan'" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
         class="warm-tile-bg py-14 px-4">
 
         <div class="max-w-4xl mx-auto">
-
-            <div class="text-center mb-10">
-                <p style="font-family:'Amiri',serif;color:rgba(26,74,48,0.4);font-size:1.1rem;">
-                    هَيْكَلُ التَّنْظِيم</p>
-                <h2
-                    style="font-family:'Cinzel',serif;font-size:1.3rem;font-weight:700;color:#0d2b1f;margin-top:0.2rem;">
-                    Bagan Pengurus</h2>
-                <div class="gold-line w-20 mx-auto mt-3" style="width:5rem;"></div>
-            </div>
 
             <!-- Advisory row (dashed, consultative) -->
             <div class="flex justify-center gap-3 mb-2 fade-up">
@@ -482,8 +643,8 @@
 
 
     <!-- ═══════════════════════════
-           TAB 2 — DEWAN PEMBINA & PERTIMBANGAN
-      ═══════════════════════════ -->
+       TAB 2 — DEWAN PEMBINA & PERTIMBANGAN
+  ═══════════════════════════ -->
     <section x-show="activeTab==='dewan'" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
         class="warm-tile-bg py-14 px-4">
@@ -503,11 +664,14 @@
 
                 <!-- Dewan Pembina -->
                 <div class="fade-up">
-                    <div class="flex items-center gap-3 mb-4 px-2">
-                        <div class="connector-v h-8 m-0"
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="connector-v h-8"
                             style="width:3px;background:var(--gold);border-radius:2px;flex-shrink:0;"></div>
                         <div>
-                            <h3 style="font-family:'Lora',serif;font-size:1rem;font-weight:600;color:#0d2b1f;">I. Dewan
+                            <div
+                                style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(26,74,48,0.5);">
+                                I.</div>
+                            <h3 style="font-family:'Lora',serif;font-size:1rem;font-weight:600;color:#0d2b1f;">Dewan
                                 Pembina</h3>
                             <p style="font-size:0.65rem;color:#6b7280;margin-top:0.1rem;">Pembina struktural &amp;
                                 kelembagaan</p>
@@ -525,11 +689,14 @@
 
                 <!-- Dewan Pertimbangan -->
                 <div class="fade-up delay-2">
-                    <div class="flex items-center gap-3 mb-4 px-2">
-                        <div class="connector-v h-8 m-0"
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="connector-v h-8"
                             style="width:3px;background:var(--gold);border-radius:2px;flex-shrink:0;"></div>
                         <div>
-                            <h3 style="font-family:'Lora',serif;font-size:1rem;font-weight:600;color:#0d2b1f;">II. Dewan
+                            <div
+                                style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(26,74,48,0.5);">
+                                II.</div>
+                            <h3 style="font-family:'Lora',serif;font-size:1rem;font-weight:600;color:#0d2b1f;">Dewan
                                 Pertimbangan</h3>
                             <p style="font-size:0.65rem;color:#6b7280;margin-top:0.1rem;">Pertimbangan strategis &amp;
                                 kemasyarakatan</p>
@@ -561,8 +728,8 @@
 
 
     <!-- ═══════════════════════════
-           TAB 3 — SEKSI-SEKSI
-      ═══════════════════════════ -->
+       TAB 3 — SEKSI-SEKSI
+  ═══════════════════════════ -->
     <section x-show="activeTab==='seksi'" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
         class="warm-tile-bg py-14 px-4">
@@ -587,11 +754,11 @@
                     <!-- Group header -->
                     <div class="flex items-center gap-3 mb-3">
                         <div :class="{
-                                'bid-ibadah':    group.key==='ibadah',
-                                'bid-pendidikan':group.key==='pendidikan',
-                                'bid-humas':     group.key==='humas',
-                                'bid-sarpras':   group.key==='sarpras'
-                                }" style="padding-left:0.75rem;">
+              'bid-ibadah':    group.key==='ibadah',
+              'bid-pendidikan':group.key==='pendidikan',
+              'bid-humas':     group.key==='humas',
+              'bid-sarpras':   group.key==='sarpras'
+            }" style="padding-left:0.75rem;">
                             <p style="font-family:'Amiri',serif;font-size:0.85rem;color:rgba(26,74,48,0.4);"
                                 x-text="group.arabic"></p>
                             <h3 style="font-family:'Lora',serif;font-size:0.95rem;font-weight:600;color:#0d2b1f;"
@@ -608,17 +775,16 @@
                     <!-- Seksi cards grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         <template x-for="s in seksiByGroup(group.key)" :key="s.key">
-                            <div class="seksi-card bg-white h-fit rounded-lg shadow-sm cursor-pointer"
-                                @click="toggleSeksi(s.key)">
+                            <div class="seksi-card bg-white" @click="toggleSeksi(s.key)">
                                 <div class="seksi-head">
                                     <div>
                                         <div class="seksi-title" x-text="s.label">
                                             <span class="cat-badge" :class="{
-                                                'badge-ibadah':    s.kategori==='ibadah',
-                                                'badge-pendidikan':s.kategori==='pendidikan',
-                                                'badge-humas':     s.kategori==='humas',
-                                                'badge-sarpras':   s.kategori==='sarpras'
-                                            }" x-text="(s.anggota.length+1)+' org'"></span>
+                        'badge-ibadah':    s.kategori==='ibadah',
+                        'badge-pendidikan':s.kategori==='pendidikan',
+                        'badge-humas':     s.kategori==='humas',
+                        'badge-sarpras':   s.kategori==='sarpras'
+                      }" x-text="(s.anggota.length+1)+' org'"></span>
                                         </div>
                                         <div class="seksi-ketua-name">
                                             <span style="color:var(--gold);margin-right:2px;">★</span>
@@ -626,8 +792,7 @@
                                         </div>
                                     </div>
                                     <div class="seksi-chevron"
-                                        :style="openSeksi===s.key ? 'transform:rotate(180deg)' : ''">
-                                        ▼</div>
+                                        :style="openSeksi===s.key ? 'transform:rotate(180deg)' : ''">▼</div>
                                 </div>
                                 <div class="seksi-body" x-show="openSeksi===s.key"
                                     x-transition:enter="transition ease-out duration-200"
@@ -654,11 +819,11 @@
                 <template x-for="group in seksiGroups">
                     <div style="display:flex;align-items:center;gap:0.5rem;">
                         <div style="width:8px;height:8px;border-radius:50%;flex-shrink:0;" :class="{
-                  'dot-ibadah':    group.key==='ibadah',
-                  'dot-pendidikan':group.key==='pendidikan',
-                  'dot-humas':     group.key==='humas',
-                  'dot-sarpras':   group.key==='sarpras'
-                }"></div>
+              'dot-ibadah':    group.key==='ibadah',
+              'dot-pendidikan':group.key==='pendidikan',
+              'dot-humas':     group.key==='humas',
+              'dot-sarpras':   group.key==='sarpras'
+            }"></div>
                         <span style="font-size:0.65rem;color:#6b7280;" x-text="group.label"></span>
                         <span style="font-size:0.65rem;color:var(--gold);font-weight:600;"
                             x-text="'('+seksiByGroup(group.key).length+')'"></span>
@@ -668,7 +833,35 @@
 
         </div>
     </section>
-</div>
 
-<!-- ── FOOTER ── -->
+    <!-- ═══════════════════════════════════════════
+           FOOTER CTA
+      ═══════════════════════════════════════════ -->
+    <section class="tile-bg py-16 text-center px-6">
+        <p style="font-family:'Amiri',serif; font-size: 1.3rem; color: rgba(201,168,76,0.6); margin-bottom: 0.5rem;">
+            تَوَاصَل</p>
+        <h3
+            style="font-family:'Cinzel',serif; font-size: 1.4rem; font-weight: 700; color: #f5f0e8; margin-bottom: 0.5rem;">
+            Ada Pertanyaan untuk Pengurus?</h3>
+        <div class="gold-line w-20 mx-auto mb-5" style="width:5rem;"></div>
+        <p
+            style="font-size: 0.85rem; color: rgba(245,240,232,0.55); max-width: 440px; margin: 0 auto 1.5rem; line-height: 1.7; font-family:'Lora',serif;">
+            Silakan hubungi sekretariat masjid atau kunjungi langsung kantor pengurus di lantai 1 Masjid Baiturrahman.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <a href="/contact"
+                style="background: #c9a84c; color: #0d2b1f; font-family:'Cinzel',serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.8rem 2rem; border-radius: 0.75rem; text-decoration: none; transition: all 0.2s;"
+                onmouseover="this.style.background='#e8c96e'" onmouseout="this.style.background='#c9a84c'">
+                Hubungi Kami
+            </a>
+            <a href="/tentang"
+                style="border: 1px solid rgba(201,168,76,0.4); color: #c9a84c; font-family:'Cinzel',serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.8rem 2rem; border-radius: 0.75rem; text-decoration: none; transition: all 0.2s;"
+                onmouseover="this.style.background='rgba(201,168,76,0.1)'"
+                onmouseout="this.style.background='transparent'">
+                Tentang Masjid
+            </a>
+        </div>
+    </section>
+
+</div>
 {{ end }}

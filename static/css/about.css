@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Amiri:wght@400;700&display=swap");
+
+/* ── Utility ── */
+.gold-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.connector-v {
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-lt));
+  margin: 0 auto;
+}
+
+.connector-h {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--gold-lt),
+    var(--gold),
+    var(--gold-lt)
+  );
+}
+
+/* ── Org node styles ── */
+.rank-1 {
+  box-shadow:
+    0 0 0 3px #c9a84c55,
+    0 0 32px #c9a84c22;
+}
+
+.rank-2 {
+  box-shadow: 0 0 0 2px #c9a84c33;
+}
+
+.avatar-ring {
+  background: conic-gradient(
+    var(--gold) 0%,
+    var(--gold-lt) 25%,
+    var(--gold) 50%,
+    var(--gold-lt) 75%,
+    var(--gold) 100%
+  );
+  padding: 3px;
+  border-radius: 50%;
+}
+
+.avatar-ring-sq {
+  background: conic-gradient(
+    var(--gold) 0%,
+    var(--gold-lt) 25%,
+    var(--gold) 50%,
+    var(--gold-lt) 75%,
+    var(--gold) 100%
+  );
+  padding: 2px;
+  border-radius: 12px;
+}
+
+.card-lift {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Tab styles ── */
+.tab-btn {
+  font-family: "Cinzel", serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-active {
+  background: var(--mid);
+  color: var(--cream);
+  border-color: var(--mid);
+}
+
+.tab-inactive {
+  background: white;
+  color: #3a5a47;
+  border-color: #c3daca;
+}
+
+.tab-inactive:hover {
+  border-color: var(--gold);
+  color: var(--mid);
+}
+
+/* ── Bidang color accents ── */
+.bid-ibadah {
+  border-left: 3px solid #c9a84c;
+}
+
+.bid-pendidikan {
+  border-left: 3px solid #4a90c9;
+}
+
+.bid-humas {
+  border-left: 3px solid #4ac990;
+}
+
+.bid-sarpras {
+  border-left: 3px solid #9a4ac9;
+}
+
+/* ── Seksi cards ── */
+.seksi-card {
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.seksi-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+}
+
+.seksi-head {
+  padding: 0.65rem 0.9rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.seksi-title {
+  font-family: "Lora", serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0d2b1f;
+  line-height: 1.35;
+}
+
+.seksi-ketua-name {
+  font-size: 0.65rem;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.seksi-chevron {
+  font-size: 0.6rem;
+  color: #9ca3af;
+  flex-shrink: 0;
+  margin-top: 3px;
+  transition: transform 0.2s;
+}
+
+.seksi-body {
+  border-top: 1px solid rgba(201, 168, 76, 0.12);
+  padding: 0.6rem 0.9rem;
+  background: rgba(201, 168, 76, 0.03);
+}
+
+.seksi-member {
+  font-size: 0.65rem;
+  color: #4b5563;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.seksi-member:last-child {
+  border-bottom: none;
+}
+
+.seksi-member.is-ketua {
+  font-weight: 600;
+  color: #0d2b1f;
+}
+
+/* ── Dewan (advisory) cards ── */
+.dewan-card {
+  border: 1px dashed rgba(201, 168, 76, 0.35);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.dewan-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dewan-item:last-child {
+  border-bottom: none;
+}
+
+.dewan-num {
+  font-family: "Cinzel", serif;
+  font-size: 0.6rem;
+  color: var(--gold);
+  min-width: 1.2rem;
+}
+
+.dewan-name {
+  font-size: 0.72rem;
+  color: #1a4a30;
+  font-family: "Lora", serif;
+}
+
+/* ── Fade-up animation ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.5s ease both;
+}
+
+.delay-1 {
+  animation-delay: 0.05s;
+}
+
+.delay-2 {
+  animation-delay: 0.1s;
+}
+
+.delay-3 {
+  animation-delay: 0.15s;
+}
+
+.delay-4 {
+  animation-delay: 0.2s;
+}
+
+.delay-5 {
+  animation-delay: 0.25s;
+}
+
+.delay-6 {
+  animation-delay: 0.3s;
+}
+
+/* ── Category badge ── */
+.cat-badge {
+  display: inline-block;
+  font-size: 0.55rem;
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.badge-ibadah {
+  background: rgba(201, 168, 76, 0.12);
+  color: #8a6a1a;
+}
+
+.badge-pendidikan {
+  background: rgba(74, 144, 201, 0.12);
+  color: #1a5a8a;
+}
+
+.badge-humas {
+  background: rgba(74, 201, 144, 0.12);
+  color: #0d6640;
+}
+
+.badge-sarpras {
+  background: rgba(154, 74, 201, 0.12);
+  color: #5a1a8a;
+}
+
+/* ── Imam tetap pills ── */
+.imam-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: white;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-family: "Lora", serif;
+  font-size: 0.72rem;
+  color: #0d2b1f;
+}
+
+.imam-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
